@@ -5,6 +5,5 @@ dist/
 __pycache__/
 *.pyc
 
-# locally generated offline basemap placeholders
-data/offline-map-1080.png
-data/offline-map-1080-terrain.png
+# local raw source archives
+v5_Hartwell_2010.zip

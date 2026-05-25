@@ -14,19 +14,23 @@ The Harvard Dataverse metadata lists the dataset license as `CC0 1.0`.
 
 Important accuracy note: Hartwell/CHGIS uses a co-location method, approximating historical areas with modern county-level spatial units and adjusted boundaries. It is suitable for heuristic reading and spatial orientation, not for exact historical boundary claims.
 
-## OpenStreetMap
+## Online basemaps
 
-Base map tiles are loaded from OpenStreetMap:
+Base map tiles can be loaded from OpenStreetMap, OpenTopoMap, and Esri World Imagery:
 
 <https://www.openstreetmap.org/>
 
-The map keeps visible attribution:
+<https://opentopomap.org/>
 
-```text
-© OpenStreetMap contributors
-```
+<https://www.esri.com/>
 
-Tile usage policy: <https://operations.osmfoundation.org/policies/tiles/>
+The map keeps visible provider attribution in the Leaflet attribution control.
+
+OpenStreetMap tile usage policy:
+
+<https://operations.osmfoundation.org/policies/tiles/>
+
+OpenTopoMap credits OpenStreetMap and SRTM data in its visible attribution.
 
 ## Leaflet
 
