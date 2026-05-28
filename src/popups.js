@@ -1,4 +1,18 @@
 (function (app) {
+  function relatedSummary(stop) {
+    if (!stop.place_key || !app.getPeopleForPlace) return "";
+    const peopleCount = app.getPeopleForPlace(stop.place_key).length;
+    const eventCount = app.getEventsForPlace(stop.place_key).length;
+    const workCount = app.getWorksForPlace(stop.place_key).length;
+
+    if (!peopleCount && !eventCount && !workCount) return "";
+
+    return `
+      <p><strong>关联：</strong>${peopleCount} 人物 / ${eventCount} 事件 / ${workCount} 作品</p>
+      <p class="popup-note">详细关联见左侧“地点关联”。</p>
+    `;
+  }
+
   app.popupHtml = function popupHtml(stop) {
     return `
       <div class="popup">
@@ -9,6 +23,7 @@
         <p><strong>章节：</strong>${stop.chapter}</p>
         <p>${stop.event}</p>
         <p>${stop.note}</p>
+        ${relatedSummary(stop)}
       </div>
     `;
   };
