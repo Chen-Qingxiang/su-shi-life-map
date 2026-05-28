@@ -20,8 +20,25 @@
       <div class="legend" id="regimeLegend"></div>
       <h2 class="side-heading">地点关联</h2>
       <div class="detail-panel" id="detailPanel"></div>
-      <h2 class="side-heading">地点</h2>
-      <div class="list" id="placeList"></div>
+      <h2 class="side-heading">资料浏览</h2>
+      <div class="tabs" id="knowledgeTabs">
+        <button type="button" class="tab is-active" data-tab="places">地点</button>
+        <button type="button" class="tab" data-tab="people">人物</button>
+        <button type="button" class="tab" data-tab="events">事件</button>
+        <button type="button" class="tab" data-tab="works">作品</button>
+      </div>
+      <div class="tab-panel is-active" data-panel="places">
+        <div class="list" id="placeList"></div>
+      </div>
+      <div class="tab-panel" data-panel="people">
+        <div class="browser-list" id="peopleList"></div>
+      </div>
+      <div class="tab-panel" data-panel="events">
+        <div class="browser-list" id="eventList"></div>
+      </div>
+      <div class="tab-panel" data-panel="works">
+        <div class="browser-list" id="workList"></div>
+      </div>
     </aside>
     <section>
       <div id="map"></div>

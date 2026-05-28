@@ -53,6 +53,45 @@
     container.appendChild(section);
   }
 
+  function renderBrowserButton(container, title, meta, summary, onClick) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "browser-item";
+
+    const titleEl = document.createElement("strong");
+    titleEl.textContent = title;
+    button.appendChild(titleEl);
+
+    if (meta) {
+      const metaEl = document.createElement("small");
+      metaEl.textContent = meta;
+      button.appendChild(metaEl);
+    }
+
+    if (summary) {
+      const summaryEl = document.createElement("small");
+      summaryEl.textContent = summary;
+      button.appendChild(summaryEl);
+    }
+
+    button.addEventListener("click", onClick);
+    container.appendChild(button);
+  }
+
+  function renderGroupedBrowserList(container, groups) {
+    groups.forEach(({ title, items }) => {
+      const group = document.createElement("section");
+      group.className = "browser-group";
+
+      const heading = document.createElement("h3");
+      heading.textContent = title;
+      group.appendChild(heading);
+
+      items.forEach((renderItem) => renderItem(group));
+      container.appendChild(group);
+    });
+  }
+
   function renderSourceNote(container, sourceNote) {
     if (!sourceNote) return;
     const note = document.createElement("p");
@@ -137,6 +176,85 @@
         }
       });
       container.appendChild(button);
+    });
+  };
+
+  app.setupKnowledgeTabs = function setupKnowledgeTabs(container) {
+    if (!container) return;
+    const tabs = Array.from(container.querySelectorAll(".tab"));
+    const panels = Array.from(document.querySelectorAll(".tab-panel"));
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const selected = tab.dataset.tab;
+        tabs.forEach((item) => item.classList.toggle("is-active", item === tab));
+        panels.forEach((panel) => panel.classList.toggle("is-active", panel.dataset.panel === selected));
+      });
+    });
+  };
+
+  app.renderPeopleBrowser = function renderPeopleBrowser(container, detailPanel) {
+    if (!container) return;
+    container.innerHTML = "";
+    const grouped = new Map();
+
+    app.getPeople().forEach((person) => {
+      const group = person.group || "未分组";
+      if (!grouped.has(group)) grouped.set(group, []);
+      grouped.get(group).push((groupContainer) => {
+        renderBrowserButton(
+          groupContainer,
+          person.name,
+          `${formatLifeYears(person)} · ${person.group || "分组待核"}`,
+          person.relation_to_su_shi,
+          () => app.renderPersonCard(detailPanel, person)
+        );
+      });
+    });
+
+    renderGroupedBrowserList(container, Array.from(grouped, ([title, items]) => ({ title, items })));
+  };
+
+  app.renderEventBrowser = function renderEventBrowser(container, detailPanel) {
+    if (!container) return;
+    container.innerHTML = "";
+    const events = app.getEvents().slice().sort((a, b) => (a.year_start || 0) - (b.year_start || 0));
+
+    events.forEach((event) => {
+      renderBrowserButton(
+        container,
+        event.title,
+        `${formatYearRange(event.year_start, event.year_end)} · ${event.type || "类型待核"} · ${placeLabel(event.place_key)}`,
+        event.summary,
+        () => {
+          app.renderEventCard(detailPanel, event);
+          if (event.place_key) app.selectPlace?.(event.place_key, { updateDetail: false });
+        }
+      );
+    });
+  };
+
+  app.renderWorkBrowser = function renderWorkBrowser(container, detailPanel) {
+    if (!container) return;
+    container.innerHTML = "";
+    const works = app.getWorks().slice().sort((a, b) => {
+      const yearA = a.year || 9999;
+      const yearB = b.year || 9999;
+      if (yearA !== yearB) return yearA - yearB;
+      return a.title.localeCompare(b.title, "zh-Hans-CN");
+    });
+
+    works.forEach((work) => {
+      renderBrowserButton(
+        container,
+        work.title,
+        `${work.year || "年代待核"} · ${work.genre || "体裁待核"} · ${placeLabel(work.place_key)}`,
+        work.summary,
+        () => {
+          app.renderWorkCard(detailPanel, work);
+          if (work.place_key) app.selectPlace?.(work.place_key, { updateDetail: false });
+        }
+      );
     });
   };
 
