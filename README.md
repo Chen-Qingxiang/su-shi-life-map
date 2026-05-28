@@ -65,6 +65,7 @@ http://localhost:8000/
 ├── src/
 │   ├── config.js
 │   ├── data.js
+│   ├── knowledge.js
 │   ├── main.js
 │   ├── map.js
 │   ├── popups.js
@@ -76,12 +77,22 @@ http://localhost:8000/
 │   ├── historical-regimes-1080.geojson
 │   ├── historical-regimes-1080.js
 │   ├── historical-regime-boundaries-1080.geojson
-│   └── historical-regime-boundaries-1080.js
+│   ├── historical-regime-boundaries-1080.js
+│   ├── sushi-people.json
+│   ├── sushi-people.js
+│   ├── sushi-relations.json
+│   ├── sushi-relations.js
+│   ├── sushi-events.json
+│   ├── sushi-events.js
+│   ├── sushi-works.json
+│   └── sushi-works.js
 ├── scripts/
+│   ├── build_data_wrappers.py
 │   ├── build_life_locations_js.py
 │   ├── build_hartwell_1080_geojson.py
 │   ├── build_regime_boundaries_1080.py
-│   └── validate_life_locations.py
+│   ├── validate_life_locations.py
+│   └── validate_knowledge_data.py
 ├── docs/
 │   └── data-notes.md
 ├── ATTRIBUTION.md
@@ -101,8 +112,13 @@ http://localhost:8000/
 <script src="data/su-shi-life-locations.js"></script>
 <script src="data/historical-regimes-1080.js"></script>
 <script src="data/historical-regime-boundaries-1080.js"></script>
+<script src="data/sushi-people.js"></script>
+<script src="data/sushi-relations.js"></script>
+<script src="data/sushi-events.js"></script>
+<script src="data/sushi-works.js"></script>
 <script src="src/config.js"></script>
 <script src="src/data.js"></script>
+<script src="src/knowledge.js"></script>
 <script src="src/popups.js"></script>
 <script src="src/sidebar.js"></script>
 <script src="src/map.js"></script>
@@ -130,6 +146,18 @@ http://localhost:8000/
 - `route`：苏轼行迹路线。
 
 如果 `data/su-shi-life-locations.geojson` 里没有显式路线，它会退回到按地点顺序自动连线。
+
+### `src/knowledge.js`
+
+知识数据查询层。它读取人物、关系、事件、作品等独立数据文件，并提供按稳定 ID 查询的 helper，例如：
+
+- `getPeopleForPlace(placeKey)`；
+- `getEventsForPlace(placeKey)`；
+- `getWorksForPlace(placeKey)`；
+- `getRelationsForPerson(personId)`；
+- `getPlaceByKey(placeKey)`。
+
+这一层先服务后续 sidebar、人物卡片和地点-事件-人物联动，不改变当前地图视觉设计。
 
 ### `src/popups.js`
 
@@ -223,6 +251,40 @@ python3 scripts/build_life_locations_js.py
 
 ```sh
 python3 scripts/validate_life_locations.py
+```
+
+### 人物 / 关系 / 事件 / 作品种子数据
+
+源文件：
+
+```text
+data/sushi-people.json
+data/sushi-relations.json
+data/sushi-events.json
+data/sushi-works.json
+```
+
+浏览器加载文件：
+
+```text
+data/sushi-people.js
+data/sushi-relations.js
+data/sushi-events.js
+data/sushi-works.js
+```
+
+这些文件是手工整理的 seed data，用于建立后续人物卡片、事件卡片、作品卡片和地点-事件-人物联动的数据模型。它们不是完整的 CBDB 导入，也不是最终考证结果；每条记录都应通过 `source_note` 保留后续核对空间。
+
+重新生成 JS wrapper：
+
+```sh
+python3 scripts/build_data_wrappers.py
+```
+
+校验知识数据：
+
+```sh
+python3 scripts/validate_knowledge_data.py
 ```
 
 ### 1080 年历史区域数据

@@ -35,6 +35,19 @@
 
 这种分层可以让项目逐步扩展到 CHGIS 风格历史地理、CBDB 风格人物资料、事件、作品和时间筛选，而不破坏当前静态 Leaflet 架构。
 
+## 当前知识种子数据层
+
+项目现在包含一组小规模、手工整理的知识 seed data：
+
+- `data/sushi-people.json`：人物基础资料和与苏轼的关系摘要。
+- `data/sushi-relations.json`：以苏轼为中心的少量人物关系。
+- `data/sushi-events.json`：与现有 `place_key` 连接的传记事件。
+- `data/sushi-works.json`：少量与地点 / 事件强相关的作品。
+
+这些数据主要用于验证交互设计和阅读辅助方向。它们不是完整的 CBDB 数据集，也不是最终考证结论。后续扩展时应逐条核对传记、CBDB、可靠二手研究和必要的一手资料，并补充更细的来源说明。
+
+对应的浏览器 wrapper 由 `scripts/build_data_wrappers.py` 生成，跨层 ID 引用由 `scripts/validate_knowledge_data.py` 校验。
+
 ## 人物关系设计方向
 
 人物关系功能不应从全量 force-directed graph 开始。苏轼相关人物数量多、关系类型复杂，如果一次显示大量节点和边，会很快变得不可读。
