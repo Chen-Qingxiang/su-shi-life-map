@@ -43,6 +43,7 @@
     }).addTo(map);
 
     const markers = new Map();
+    const markersByPlaceKey = new Map();
     const markerLayer = L.layerGroup().addTo(map);
     stops.forEach((stop) => {
       const color = app.stages[stop.stage]?.color || "#344054";
@@ -55,7 +56,15 @@
         fillOpacity: 0.92
       }).addTo(markerLayer).bindPopup(app.popupHtml(stop), { maxWidth: 320 });
       marker.bindTooltip(`${stop.order}. ${stop.name}`, { direction: "top", offset: [0, -8] });
+      marker.on("click", () => {
+        if (stop.place_key) {
+          app.selectPlace?.(stop.place_key, { pan: false, openPopup: false });
+        }
+      });
       markers.set(stop.order, marker);
+      if (stop.place_key) {
+        markersByPlaceKey.set(stop.place_key, marker);
+      }
     });
 
     const adminBorderLayer = window.historicalRegimes1080 ? L.geoJSON(window.historicalRegimes1080, {
@@ -97,6 +106,6 @@
       map.fitBounds(bounds.pad(0.15));
     }
 
-    return { map, markers };
+    return { map, markers, markersByPlaceKey };
   };
 })(window.SuShiLifeMap = window.SuShiLifeMap || {});

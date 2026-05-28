@@ -123,6 +123,12 @@ button.place:hover {
   background: #fafafa;
 }
 
+button.place.is-active {
+  border-color: #344054;
+  box-shadow: inset 3px 0 0 #344054;
+  background: #f9fafb;
+}
+
 .place strong {
   display: block;
   font-size: 14px;
@@ -135,6 +141,78 @@ button.place:hover {
   font-size: 12px;
   line-height: 1.45;
   margin-top: 3px;
+}
+
+.detail-panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfbf9;
+  padding: 12px;
+  margin: 0 0 16px;
+}
+
+.knowledge-header span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.knowledge-header h3 {
+  margin: 4px 0;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.knowledge-header p,
+.knowledge-summary {
+  margin: 5px 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.knowledge-section {
+  margin-top: 12px;
+}
+
+.knowledge-section h4 {
+  margin: 0 0 7px;
+  color: #344054;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.knowledge-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.knowledge-chips button {
+  border: 1px solid #d0d5dd;
+  border-radius: 999px;
+  background: #fff;
+  color: #344054;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1.25;
+  padding: 5px 8px;
+}
+
+.knowledge-chips button:hover {
+  border-color: #667085;
+  background: #f2f4f7;
+}
+
+.knowledge-source {
+  margin: 12px 0 0;
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
 }
 
 #map {
@@ -152,6 +230,10 @@ button.place:hover {
   margin: 4px 0;
   font-size: 13px;
   line-height: 1.45;
+}
+
+.popup-note {
+  color: var(--muted);
 }
 
 .fallback {
