@@ -45,6 +45,10 @@
     };
 
     app.renderPlaceList(document.querySelector("#placeList"), stops, markers, map, app.stages);
+    app.setupKnowledgeTabs(document.querySelector("#knowledgeTabs"));
+    app.renderPeopleBrowser(document.querySelector("#peopleList"), detailPanel);
+    app.renderEventBrowser(document.querySelector("#eventList"), detailPanel);
+    app.renderWorkBrowser(document.querySelector("#workList"), detailPanel);
     app.renderDetailIntro(detailPanel);
   }
 
