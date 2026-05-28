@@ -80,7 +80,10 @@ http://localhost:8000/
 ├── scripts/
 │   ├── build_life_locations_js.py
 │   ├── build_hartwell_1080_geojson.py
-│   └── build_regime_boundaries_1080.py
+│   ├── build_regime_boundaries_1080.py
+│   └── validate_life_locations.py
+├── docs/
+│   └── data-notes.md
 ├── ATTRIBUTION.md
 ├── LICENSE
 └── README.md
@@ -195,6 +198,7 @@ data/su-shi-life-locations.js
 {
   "kind": "stop",
   "order": 10,
+  "place_key": "huangzhou",
   "name": "黄州",
   "modern": "湖北省黄冈市黄州区",
   "years": "1080-1084",
@@ -207,10 +211,18 @@ data/su-shi-life-locations.js
 }
 ```
 
+其中 `place_key` 是地点的稳定连接键。后续如新增历史地名 / 行政语境、人物、事件、作品等独立数据层，应优先通过 `place_key` 连接，而不是依赖地点名称或展示顺序。更详细的数据边界和未来分层原则见 `docs/data-notes.md`。
+
 更新地点数据后，需要重新生成对应的 JS 文件：
 
 ```sh
 python3 scripts/build_life_locations_js.py
+```
+
+可选校验地点数据：
+
+```sh
+python3 scripts/validate_life_locations.py
 ```
 
 ### 1080 年历史区域数据

@@ -137,6 +137,7 @@
       "properties": {
         "kind": "stop",
         "order": 1,
+        "place_key": "meishan",
         "name": "眉州眉山",
         "modern": "四川省眉山市",
         "years": "1036-1056；1057-1059",
@@ -160,6 +161,7 @@
       "properties": {
         "kind": "stop",
         "order": 2,
+        "place_key": "chengdu",
         "name": "益州成都",
         "modern": "四川省成都市",
         "years": "1055-1056 前后",
@@ -183,6 +185,7 @@
       "properties": {
         "kind": "stop",
         "order": 3,
+        "place_key": "bianjing",
         "name": "汴京",
         "modern": "河南省开封市",
         "years": "1056-1057；1060-1061；1065-1071；1085-1089",
@@ -206,6 +209,7 @@
       "properties": {
         "kind": "stop",
         "order": 4,
+        "place_key": "jingzhou",
         "name": "荆州",
         "modern": "湖北省荆州市",
         "years": "1059-1060",
@@ -229,6 +233,7 @@
       "properties": {
         "kind": "stop",
         "order": 5,
+        "place_key": "fengxiang",
         "name": "凤翔府",
         "modern": "陕西省宝鸡市凤翔区",
         "years": "1061-1064",
@@ -252,6 +257,7 @@
       "properties": {
         "kind": "stop",
         "order": 6,
+        "place_key": "hangzhou",
         "name": "杭州",
         "modern": "浙江省杭州市",
         "years": "1071-1074；1089-1091",
@@ -275,6 +281,7 @@
       "properties": {
         "kind": "stop",
         "order": 7,
+        "place_key": "mizhou",
         "name": "密州",
         "modern": "山东省诸城市",
         "years": "1074-1076",
@@ -298,6 +305,7 @@
       "properties": {
         "kind": "stop",
         "order": 8,
+        "place_key": "xuzhou",
         "name": "徐州",
         "modern": "江苏省徐州市",
         "years": "1077-1079",
@@ -321,6 +329,7 @@
       "properties": {
         "kind": "stop",
         "order": 9,
+        "place_key": "huzhou",
         "name": "湖州",
         "modern": "浙江省湖州市",
         "years": "1079",
@@ -344,6 +353,7 @@
       "properties": {
         "kind": "stop",
         "order": 10,
+        "place_key": "huangzhou",
         "name": "黄州",
         "modern": "湖北省黄冈市黄州区",
         "years": "1080-1084",
@@ -367,6 +377,7 @@
       "properties": {
         "kind": "stop",
         "order": 11,
+        "place_key": "lushan_jiangzhou",
         "name": "庐山 / 江州",
         "modern": "江西省九江市庐山一带",
         "years": "1084",
@@ -390,6 +401,7 @@
       "properties": {
         "kind": "stop",
         "order": 12,
+        "place_key": "jinling",
         "name": "金陵",
         "modern": "江苏省南京市",
         "years": "1084",
@@ -397,7 +409,8 @@
         "chapter": "07 飘泊江淮",
         "event": "谒见退居金陵的王安石。",
         "note": "王、苏关系从政治对立转为晚年相见的重要场景。",
-        "age": "48"
+        "age": "48",
+        "age_detail": "1084（48 岁）"
       },
       "geometry": {
         "type": "Point",
@@ -412,6 +425,7 @@
       "properties": {
         "kind": "stop",
         "order": 13,
+        "place_key": "yangxian",
         "name": "阳羡",
         "modern": "江苏省宜兴市",
         "years": "1084-1085 前后",
@@ -435,6 +449,7 @@
       "properties": {
         "kind": "stop",
         "order": 14,
+        "place_key": "yingzhou",
         "name": "颍州",
         "modern": "安徽省阜阳市",
         "years": "1091",
@@ -458,6 +473,7 @@
       "properties": {
         "kind": "stop",
         "order": 15,
+        "place_key": "yangzhou",
         "name": "扬州",
         "modern": "江苏省扬州市",
         "years": "1092",
@@ -481,6 +497,7 @@
       "properties": {
         "kind": "stop",
         "order": 16,
+        "place_key": "dingzhou",
         "name": "定州",
         "modern": "河北省定州市",
         "years": "1093-1094",
@@ -504,6 +521,7 @@
       "properties": {
         "kind": "stop",
         "order": 17,
+        "place_key": "huizhou",
         "name": "惠州",
         "modern": "广东省惠州市",
         "years": "1094-1097",
@@ -527,6 +545,7 @@
       "properties": {
         "kind": "stop",
         "order": 18,
+        "place_key": "danzhou",
         "name": "儋州",
         "modern": "海南省儋州市",
         "years": "1097-1100",
@@ -550,6 +569,7 @@
       "properties": {
         "kind": "stop",
         "order": 19,
+        "place_key": "guangzhou",
         "name": "广州",
         "modern": "广东省广州市",
         "years": "1100",
@@ -573,6 +593,7 @@
       "properties": {
         "kind": "stop",
         "order": 20,
+        "place_key": "shaozhou",
         "name": "韶州",
         "modern": "广东省韶关市",
         "years": "1101 前后",
@@ -596,6 +617,7 @@
       "properties": {
         "kind": "stop",
         "order": 21,
+        "place_key": "qianzhou",
         "name": "虔州",
         "modern": "江西省赣州市",
         "years": "1101 前后",
@@ -603,7 +625,8 @@
         "chapter": "14 北归",
         "event": "北归途中经虔州。",
         "note": "北归途中由岭南转入江南的重要节点。",
-        "age": "65"
+        "age": "65",
+        "age_detail": "1101 前后（65 岁）"
       },
       "geometry": {
         "type": "Point",
@@ -618,6 +641,7 @@
       "properties": {
         "kind": "stop",
         "order": 22,
+        "place_key": "changzhou",
         "name": "常州",
         "modern": "江苏省常州市",
         "years": "1101",
@@ -625,7 +649,8 @@
         "chapter": "14 北归",
         "event": "北归途中染疾，卒于常州。",
         "note": "苏轼生命终点。",
-        "age": "65"
+        "age": "65",
+        "age_detail": "1101（65 岁）"
       },
       "geometry": {
         "type": "Point",
