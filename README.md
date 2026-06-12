@@ -7,6 +7,10 @@
 ## 当前功能
 
 - 展示苏轼生平主线地点：眉州眉山、成都、汴京、杭州、密州、徐州、黄州、惠州、儋州、常州等。
+- 支持“生平总览 / 章节旅程”模式切换；首个章节旅程为第一章的 1059—1060 年南行。
+- 南行旅程按水路、陆路分别着色，展示 24 个行程阶段、23 段路线，并关联第一章已经整理的 76 首苏轼诗作。
+- 76 首南行诗作已接入可直接阅读的公开全文，并逐首保留维基文库来源链接与校勘提示。
+- 水系现在分成“东坡相关命名河流、中国及周边大江干流、主要支流、区域河网”四级开关；山地同时提供 GMBA 主要山系范围、OSM 命名山脊线、Esri World Hillshade 与 OpenTopoMap。
 - 按人生阶段给地点着色，包括少年与家族、入仕与朝廷、地方治理、乌台诗狱、黄州、岭海贬谪、北归等。
 - 点击地图点位或左侧地点列表，可查看对应地点的时间、年龄、章节、事件和说明。
 - 选择地点后，左侧“地点关联”面板会展示相关人物、事件和作品的 seed data，并可打开简洁卡片。
@@ -80,6 +84,20 @@ http://localhost:8000/
 │   ├── historical-regimes-1080.js
 │   ├── historical-regime-boundaries-1080.geojson
 │   ├── historical-regime-boundaries-1080.js
+│   ├── physical-waterways.geojson
+│   ├── physical-waterways.js
+│   ├── hydrorivers-major.geojson
+│   ├── hydrorivers-major.js
+│   ├── hydrorivers-tributaries.geojson
+│   ├── hydrorivers-tributaries.js
+│   ├── hydrorivers-regional.geojson
+│   ├── hydrorivers-regional.js
+│   ├── named-rivers.geojson
+│   ├── named-rivers.js
+│   ├── major-mountain-systems.geojson
+│   ├── major-mountain-systems.js
+│   ├── named-mountain-ridges.geojson
+│   ├── named-mountain-ridges.js
 │   ├── sushi-people.json
 │   ├── sushi-people.js
 │   ├── sushi-relations.json
@@ -87,14 +105,31 @@ http://localhost:8000/
 │   ├── sushi-events.json
 │   ├── sushi-events.js
 │   ├── sushi-works.json
-│   └── sushi-works.js
+│   ├── sushi-works.js
+│   ├── sushi-journeys.json
+│   ├── sushi-journeys.js
+│   ├── sushi-journey-visits.geojson
+│   ├── sushi-journey-visits.js
+│   ├── sushi-journey-segments.geojson
+│   ├── sushi-journey-segments.js
+│   ├── sushi-journey-works.json
+│   └── sushi-journey-works.js
 ├── scripts/
 │   ├── build_data_wrappers.py
+│   ├── build_nanxing_journey_seed.py
+│   ├── enrich_nanxing_works_from_wikisource.py
+│   ├── build_osm_waterways.py
+│   ├── build_hydrorivers_layers.py
+│   ├── build_natural_earth_named_rivers.py
+│   ├── build_gmba_mountain_systems.py
+│   ├── build_osm_mountain_ridges.py
 │   ├── build_life_locations_js.py
 │   ├── build_hartwell_1080_geojson.py
 │   ├── build_regime_boundaries_1080.py
 │   ├── validate_life_locations.py
-│   └── validate_knowledge_data.py
+│   ├── validate_knowledge_data.py
+│   ├── validate_journey_data.py
+│   └── validate_physical_geography.py
 ├── docs/
 │   └── data-notes.md
 ├── ATTRIBUTION.md
@@ -114,10 +149,21 @@ http://localhost:8000/
 <script src="data/su-shi-life-locations.js"></script>
 <script src="data/historical-regimes-1080.js"></script>
 <script src="data/historical-regime-boundaries-1080.js"></script>
+<script src="data/physical-waterways.js"></script>
+<script src="data/hydrorivers-major.js"></script>
+<script src="data/hydrorivers-tributaries.js"></script>
+<script src="data/hydrorivers-regional.js"></script>
+<script src="data/named-rivers.js"></script>
+<script src="data/major-mountain-systems.js"></script>
+<script src="data/named-mountain-ridges.js"></script>
 <script src="data/sushi-people.js"></script>
 <script src="data/sushi-relations.js"></script>
 <script src="data/sushi-events.js"></script>
 <script src="data/sushi-works.js"></script>
+<script src="data/sushi-journeys.js"></script>
+<script src="data/sushi-journey-visits.js"></script>
+<script src="data/sushi-journey-segments.js"></script>
+<script src="data/sushi-journey-works.js"></script>
 <script src="src/config.js"></script>
 <script src="src/data.js"></script>
 <script src="src/knowledge.js"></script>
@@ -192,7 +238,8 @@ http://localhost:8000/
 - 政权外缘边界；
 - 苏轼路线；
 - 苏轼地点 marker；
-- 河流、山脉、古道等辅助图层；
+- OpenStreetMap 现代真实水系矢量；
+- Esri World Hillshade 与 OpenTopoMap 地形表达；
 - 右上角图层控制器。
 
 这是项目中最适合学习 Leaflet 的文件。
@@ -290,6 +337,78 @@ python3 scripts/build_data_wrappers.py
 ```sh
 python3 scripts/validate_knowledge_data.py
 ```
+
+### 章节旅程数据
+
+首个章节旅程是第一章的“1059—1060 南行”。它把旅程本体、行程节点、移动路段与沿途诗作分开保存：
+
+```text
+data/sushi-journeys.json
+data/sushi-journey-visits.geojson
+data/sushi-journey-segments.geojson
+data/sushi-journey-works.json
+```
+
+第一版数据由 `01 食蓼少年.md` 中的“路线图”和“苏轼南行诗作索引”生成：
+
+```sh
+python3 scripts/build_nanxing_journey_seed.py
+python3 scripts/enrich_nanxing_works_from_wikisource.py
+python3 scripts/build_data_wrappers.py
+python3 scripts/validate_journey_data.py
+```
+
+旅程路线与节点坐标仍是阅读用近似值；位置待核的节点会使用虚线边框显示。
+
+76 首诗文均已附全文：其中 74 首来自维基文库《东坡全集》，另有 2 首使用诗歌库《苏轼诗全集》补充。每条作品数据保留 `text_source_url` 和 `text_status`；这里的目标是方便随地图阅读，而不是替代点校本。
+
+### 分级现代水系与地形
+
+主地图不再使用手绘河流和任意山脉轴线，而是提供可独立开关的自然地理层：
+
+- `水系 0`：OpenStreetMap 中与南行路线有关的命名河道几何；
+- `水系 1`：HydroRIVERS Strahler 8—9 级大江干流骨架，默认显示；
+- `水系 2`：HydroRIVERS Strahler 7 级主要支流；
+- `水系 3`：HydroRIVERS Strahler 6 级区域河网；
+- `水系信息`：Natural Earth 命名河流识别层；点击河流时显示名称、简要地理介绍与进一步阅读链接；
+- `山地 1`：GMBA Mountain Inventory 的主要山系范围概括轮廓与名称，默认显示；
+- `山地 2`：OpenStreetMap 中已有名称的真实山脊线，覆盖完整度因地区而异；
+- Esri World Hillshade 和 OpenTopoMap 继续表达连续地形起伏；
+- 古代道路暂不作为“真实路线”显示，需在历史交通文献和历史 GIS 数据支持下逐段考证。
+
+`水系 1—3` 是增量图层。想看更详细水网时，可依次同时打开；若只关心苏轼南行，则只保留 `水系 0` 即可。
+
+当前三级 HydroRIVERS 图层合计包含 32,654 个河段：一级干流骨架 4,935 段、主要支流 8,296 段、区域河网 19,423 段。山地层包含 24 个主要山系范围和 1,778 条 OSM 命名山脊。
+
+HydroRIVERS 本身没有河名字段，因此结构河网不再弹出重复的通用等级说明。默认开启的 Natural Earth 命名河流层覆盖在结构水网上：悬停可见河名，点击可阅读河流简介。没有可靠名称参照的细小河段保持不可点击，避免误配名称。
+
+重新下载与南行相关的 OSM 命名河流：
+
+```sh
+python3 scripts/build_osm_waterways.py
+```
+
+从 HydroRIVERS 亚洲 shapefile 重新生成三级河网：
+
+```sh
+python3 scripts/build_hydrorivers_layers.py /path/to/HydroRIVERS_v10_as.shp
+```
+
+从 Natural Earth 1:10m 河流中心线重新生成河名与简介层：
+
+```sh
+python3 scripts/build_natural_earth_named_rivers.py /path/to/ne_10m_rivers_lake_centerlines.shp
+```
+
+从 GMBA `standard 300 selection` shapefile 重新生成主要山系轮廓，并重新下载 OSM 命名山脊：
+
+```sh
+python3 scripts/build_gmba_mountain_systems.py /path/to/GMBA_Inventory_v2.0_standard_300.shp
+python3 scripts/build_osm_mountain_ridges.py
+python3 scripts/validate_physical_geography.py
+```
+
+两个 shapefile 转换脚本需要 `pyshp`。这些河道与山地数据仍是**现代自然地理参照**。当前项目暂不考证古河道变化。
 
 ### 1080 年历史区域数据
 

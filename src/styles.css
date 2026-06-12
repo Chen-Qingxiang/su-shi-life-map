@@ -66,6 +66,56 @@ h2.side-heading {
   margin: 0 0 14px;
 }
 
+.mode-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 0 0 12px;
+}
+
+.mode-button {
+  border: 1px solid #98a2b3;
+  border-radius: 8px;
+  background: #fff;
+  color: #344054;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 8px;
+}
+
+.mode-button.is-active {
+  border-color: #1d2939;
+  background: #1d2939;
+  color: #fff;
+}
+
+.journey-banner {
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  background: #eff6ff;
+  margin: 0 0 14px;
+  padding: 10px;
+}
+
+.journey-banner strong,
+.journey-banner span {
+  display: block;
+}
+
+.journey-banner strong {
+  color: #1e3a8a;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.journey-banner span {
+  color: #475467;
+  font-size: 11px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
 .legend {
   display: grid;
   gap: 7px;
@@ -105,6 +155,15 @@ h2.side-heading {
 .list {
   display: grid;
   gap: 10px;
+}
+
+.itinerary-phase {
+  margin: 8px 0 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0 0 6px;
+  color: #344054;
+  font-size: 12px;
+  line-height: 1.35;
 }
 
 .tabs {
@@ -209,6 +268,58 @@ button.place.is-active {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.55;
+}
+
+.journey-reading {
+  border-left: 3px solid #93c5fd;
+  padding-left: 8px;
+}
+
+.poem-text {
+  margin: 12px 0;
+  border: 1px solid #d6d3d1;
+  border-radius: 8px;
+  background: #fffdf7;
+  padding: 12px;
+  color: #292524;
+  font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+  font-size: 14px;
+  line-height: 1.9;
+  white-space: pre-wrap;
+}
+
+.knowledge-source a {
+  color: #175cd3;
+}
+
+.mountain-system-label {
+  width: max-content !important;
+  height: auto !important;
+  margin: 0 !important;
+  border: 0;
+  background: rgb(255 253 247 / 72%);
+  box-shadow: 0 0 3px rgb(255 255 255 / 95%);
+  color: #6b3600;
+  font-family: "Noto Serif SC", "Songti SC", SimSun, serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  opacity: 0.82;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.leaflet-control-layers-expanded {
+  max-height: calc(100vh - 30px);
+  overflow-y: auto;
+}
+
+.river-popup .popup-subtitle {
+  margin-top: -6px;
+  color: var(--muted);
+  font-style: italic;
 }
 
 .knowledge-section {

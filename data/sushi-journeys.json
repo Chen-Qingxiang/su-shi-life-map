@@ -1,0 +1,26 @@
+[
+  {
+    "journey_id": "nanxing_1059_1060",
+    "title": "嘉祐四年至五年南行",
+    "short_title": "1059—1060 南行",
+    "chapter": "01 食蓼少年",
+    "year_start": 1059,
+    "year_end": 1060,
+    "summary": "三苏一家自眉州沿岷江、长江穿三峡至荆州，再由陆路经襄阳、唐州、许州、汝州、尉氏趋向汴京。",
+    "phases": [
+      {
+        "phase_id": "nanxing_water",
+        "title": "离蜀水路",
+        "travel_mode": "水路",
+        "color": "#2563eb"
+      },
+      {
+        "phase_id": "nanxing_land",
+        "title": "荆州北上",
+        "travel_mode": "陆路",
+        "color": "#9a5b32"
+      }
+    ],
+    "source_note": "01 食蓼少年.md：九 南行"
+  }
+]

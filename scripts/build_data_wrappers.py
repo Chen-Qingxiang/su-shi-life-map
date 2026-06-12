@@ -15,6 +15,10 @@ WRAPPERS = [
     ("sushi-relations.json", "sushi-relations.js", "suShiRelations"),
     ("sushi-events.json", "sushi-events.js", "suShiEvents"),
     ("sushi-works.json", "sushi-works.js", "suShiWorks"),
+    ("sushi-journeys.json", "sushi-journeys.js", "suShiJourneys"),
+    ("sushi-journey-visits.geojson", "sushi-journey-visits.js", "suShiJourneyVisits"),
+    ("sushi-journey-segments.geojson", "sushi-journey-segments.js", "suShiJourneySegments"),
+    ("sushi-journey-works.json", "sushi-journey-works.js", "suShiJourneyWorks"),
 ]
 
 

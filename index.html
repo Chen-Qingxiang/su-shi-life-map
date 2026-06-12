@@ -13,14 +13,22 @@
     <aside>
       <h1>苏轼生平行迹地图</h1>
       <p class="sub">根据《苏东坡新传》章节主线整理。地点使用现代城市近似坐标，路线连线用于理解人生阶段，不代表精确古道。</p>
-      <p class="source-note">右上角可开关“1080 年政权区域”“县级/行政区边界（Hartwell）”“政权外缘边界（栅格化近似）”“山川河流古道（示意）”等图层。历史区域来自 Hartwell/CHGIS；山川河流古道为读书辅助示意，不等于精确考据。</p>
+      <p class="source-note">右上角可分级开关水系：东坡相关命名河流、中国及周边的大江干流、主要支流与区域河网；也可开关 GMBA 主要山系范围和 OSM 命名山脊线。Esri 地形晕渲与 OpenTopoMap 继续保留。现代自然地理图层不等于北宋河道或古道复原。</p>
+      <div class="mode-switch" id="modeSwitch" aria-label="地图阅读模式">
+        <button type="button" class="mode-button is-active" data-mode="life">生平总览</button>
+        <button type="button" class="mode-button" data-mode="journey">章节旅程</button>
+      </div>
+      <div class="journey-banner" id="journeyBanner" hidden>
+        <strong>01 食蓼少年 · 1059—1060 南行</strong>
+        <span>蓝线为离蜀水路，棕色虚线为荆州北上陆路；虚线边框节点表示位置仍待核。</span>
+      </div>
       <h2 class="side-heading">人生阶段</h2>
       <div class="legend" id="legend"></div>
       <h2 class="side-heading">1080 年政权区域（色盲友好配色）</h2>
       <div class="legend" id="regimeLegend"></div>
       <h2 class="side-heading">地点关联</h2>
       <div class="detail-panel" id="detailPanel"></div>
-      <h2 class="side-heading">资料浏览</h2>
+      <h2 class="side-heading" id="browserHeading">资料浏览</h2>
       <div class="tabs" id="knowledgeTabs">
         <button type="button" class="tab is-active" data-tab="places">地点</button>
         <button type="button" class="tab" data-tab="people">人物</button>
@@ -50,10 +58,21 @@
   <script src="data/su-shi-life-locations.js"></script>
   <script src="data/historical-regimes-1080.js"></script>
   <script src="data/historical-regime-boundaries-1080.js"></script>
+  <script src="data/physical-waterways.js"></script>
+  <script src="data/hydrorivers-major.js"></script>
+  <script src="data/hydrorivers-tributaries.js"></script>
+  <script src="data/hydrorivers-regional.js"></script>
+  <script src="data/named-rivers.js"></script>
+  <script src="data/major-mountain-systems.js"></script>
+  <script src="data/named-mountain-ridges.js"></script>
   <script src="data/sushi-people.js"></script>
   <script src="data/sushi-relations.js"></script>
   <script src="data/sushi-events.js"></script>
   <script src="data/sushi-works.js"></script>
+  <script src="data/sushi-journeys.js"></script>
+  <script src="data/sushi-journey-visits.js"></script>
+  <script src="data/sushi-journey-segments.js"></script>
+  <script src="data/sushi-journey-works.js"></script>
   <script src="src/config.js"></script>
   <script src="src/data.js"></script>
   <script src="src/knowledge.js"></script>

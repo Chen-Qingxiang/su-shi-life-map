@@ -179,6 +179,34 @@
     });
   };
 
+  app.renderJourneyList = function renderJourneyList(container, visits) {
+    if (!container) return;
+    container.innerHTML = "";
+    let currentPhase = "";
+    visits.forEach((visit) => {
+      if (visit.phase_id !== currentPhase) {
+        currentPhase = visit.phase_id;
+        const heading = document.createElement("h3");
+        heading.className = "itinerary-phase";
+        heading.textContent = currentPhase === "nanxing_water" ? "第一段 · 离蜀水路" : "第二段 · 荆州北上";
+        container.appendChild(heading);
+      }
+
+      const worksCount = app.getJourneyWorksForVisit?.(visit.visit_id).length || 0;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "place journey-stop";
+      button.dataset.visitId = visit.visit_id;
+      button.innerHTML = `
+        <strong><span class="dot" style="background:${visit.phase_id === "nanxing_water" ? "#2563eb" : "#9a5b32"}"></span>${visit.order}. ${visit.stage}</strong>
+        <small>${visit.time} · ${visit.visit_type_label} · ${visit.travel_mode}</small>
+        <small>${visit.ancient_place} · 关联诗作 ${worksCount} 首${visit.certainty === "low" ? " · 位置待核" : ""}</small>
+      `;
+      button.addEventListener("click", () => app.selectJourneyVisit?.(visit.visit_id));
+      container.appendChild(button);
+    });
+  };
+
   app.setupKnowledgeTabs = function setupKnowledgeTabs(container) {
     if (!container) return;
     const tabs = Array.from(container.querySelectorAll(".tab"));
@@ -258,9 +286,33 @@
     });
   };
 
+  app.renderJourneyWorkBrowser = function renderJourneyWorkBrowser(container, detailPanel, journeyId) {
+    if (!container) return;
+    container.innerHTML = "";
+    const works = app.getJourneyWorks?.(journeyId) || [];
+    works.forEach((work) => {
+      renderBrowserButton(
+        container,
+        work.title,
+        `${work.time_text || work.year} · ${work.location_text}`,
+        work.summary,
+        () => {
+          app.renderJourneyWorkCard(detailPanel, work);
+          app.selectJourneyVisit?.(work.visit_id, { updateDetail: false });
+        }
+      );
+    });
+  };
+
   app.setActivePlaceButton = function setActivePlaceButton(placeKey) {
     document.querySelectorAll(".place").forEach((button) => {
       button.classList.toggle("is-active", button.dataset.placeKey === placeKey);
+    });
+  };
+
+  app.setActiveJourneyVisitButton = function setActiveJourneyVisitButton(visitId) {
+    document.querySelectorAll(".journey-stop").forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.visitId === visitId);
     });
   };
 
@@ -268,6 +320,84 @@
     if (!container) return;
     container.innerHTML = "";
     setPanelHeader(container, "阅读联动", "选择一个地点", "点击地图点位或左侧地点列表，查看相关人物、事件和作品。");
+  };
+
+  app.renderJourneyIntro = function renderJourneyIntro(container, journey) {
+    if (!container || !journey) return;
+    container.innerHTML = "";
+    setPanelHeader(container, "章节旅程", journey.short_title, `${journey.chapter} · ${journey.year_start}-${journey.year_end}`);
+    const summary = document.createElement("p");
+    summary.className = "knowledge-summary";
+    summary.textContent = journey.summary;
+    container.appendChild(summary);
+    const counts = document.createElement("p");
+    counts.className = "muted-line";
+    counts.textContent = `本版收录 24 个行程阶段、23 段路线和 ${app.getJourneyWorks?.(journey.journey_id).length || 0} 首苏轼诗作。`;
+    container.appendChild(counts);
+  };
+
+  app.renderJourneyVisitDetail = function renderJourneyVisitDetail(container, visit) {
+    if (!container || !visit) return;
+    container.innerHTML = "";
+    const works = app.getJourneyWorksForVisit?.(visit.visit_id) || [];
+    setPanelHeader(container, visit.visit_type_label, `${visit.order}. ${visit.stage}`, `${visit.time} · ${visit.travel_mode} · ${visit.ancient_place}`);
+
+    const event = document.createElement("p");
+    event.className = "knowledge-summary";
+    event.textContent = visit.event;
+    container.appendChild(event);
+
+    const reading = document.createElement("p");
+    reading.className = "knowledge-summary journey-reading";
+    reading.textContent = visit.reading;
+    container.appendChild(reading);
+
+    const certainty = document.createElement("p");
+    certainty.className = "muted-line";
+    certainty.textContent = `今地参照：${visit.modern} · 坐标可信度：${visit.certainty}`;
+    container.appendChild(certainty);
+
+    renderKnowledgeSection(container, "关联诗作", works, "此节点暂无已关联诗作。", (work) => work.title, (work) => app.renderJourneyWorkCard(container, work));
+  };
+
+  app.renderJourneyWorkCard = function renderJourneyWorkCard(container, work) {
+    if (!container || !work) return;
+    container.innerHTML = "";
+    setPanelHeader(container, "南行诗作", work.title, `${work.time_text || work.year} · ${work.location_text}`);
+    const summary = document.createElement("p");
+    summary.className = "knowledge-summary";
+    summary.textContent = work.summary;
+    container.appendChild(summary);
+
+    if (work.text) {
+      const poemText = document.createElement("pre");
+      poemText.className = "poem-text";
+      poemText.textContent = work.text;
+      container.appendChild(poemText);
+    }
+
+    const collection = document.createElement("p");
+    collection.className = "muted-line";
+    collection.textContent = "作品集关联：《南行集》 · 作者：苏轼";
+    container.appendChild(collection);
+
+    if (work.text_source_url) {
+      const source = document.createElement("p");
+      source.className = "knowledge-source";
+      const link = document.createElement("a");
+      link.href = work.text_source_url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = work.text_source_label || "查看公开文本来源";
+      source.append("文本来源：", link, `。${work.text_status || ""}`);
+      container.appendChild(source);
+    }
+
+    renderKnowledgeSection(container, "行程节点", [work.visit_id].filter(Boolean), "节点待核。", (visitId) => {
+      const visit = app.getJourneyVisitById?.(visitId);
+      return visit ? `${visit.order}. ${visit.stage}` : visitId;
+    }, (visitId) => app.selectJourneyVisit?.(visitId));
+    renderSourceNote(container, work.source_note);
   };
 
   app.renderPlaceKnowledgeDetail = function renderPlaceKnowledgeDetail(container, stop) {

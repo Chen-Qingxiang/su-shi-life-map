@@ -20,4 +20,23 @@
 
     return { route, stops };
   };
+
+  app.getJourneyMapData = function getJourneyMapData(journeyId) {
+    const visitsGeoJSON = window.suShiJourneyVisits || { type: "FeatureCollection", features: [] };
+    const segmentsGeoJSON = window.suShiJourneySegments || { type: "FeatureCollection", features: [] };
+    const visits = visitsGeoJSON.features
+      .filter((feature) => feature.geometry?.type === "Point" && feature.properties?.journey_id === journeyId)
+      .map((feature) => {
+        const [lon, lat] = feature.geometry.coordinates;
+        return { ...feature.properties, lat, lon };
+      })
+      .sort((a, b) => a.order - b.order);
+
+    const segments = {
+      type: "FeatureCollection",
+      features: segmentsGeoJSON.features.filter((feature) => feature.properties?.journey_id === journeyId)
+    };
+
+    return { visits, segments };
+  };
 })(window.SuShiLifeMap = window.SuShiLifeMap || {});

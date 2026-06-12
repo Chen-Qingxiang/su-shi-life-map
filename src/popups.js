@@ -28,6 +28,22 @@
     `;
   };
 
+  app.journeyVisitPopupHtml = function journeyVisitPopupHtml(visit) {
+    const works = app.getJourneyWorksForVisit?.(visit.visit_id) || [];
+    return `
+      <div class="popup journey-popup">
+        <h2>${visit.order}. ${visit.stage}</h2>
+        <p><strong>时间：</strong>${visit.time}</p>
+        <p><strong>地点：</strong>${visit.ancient_place}</p>
+        <p><strong>今地：</strong>${visit.modern}</p>
+        <p><strong>性质：</strong>${visit.visit_type_label} · ${visit.travel_mode}</p>
+        <p>${visit.event}</p>
+        <p class="popup-note">${visit.reading}</p>
+        <p><strong>关联诗作：</strong>${works.length} 首</p>
+      </div>
+    `;
+  };
+
   app.regimePopupHtml = function regimePopupHtml(feature) {
     const props = feature.properties;
     const unitName = props.unit_name || props.unit_name_short || props.regime_name_zh;

@@ -41,6 +41,30 @@
     return asArray(window.suShiWorks);
   };
 
+  app.getJourneys = function getJourneys() {
+    return asArray(window.suShiJourneys);
+  };
+
+  app.getJourneyById = function getJourneyById(journeyId) {
+    return app.getJourneys().find((journey) => journey.journey_id === journeyId) || null;
+  };
+
+  app.getJourneyWorks = function getJourneyWorks(journeyId) {
+    return asArray(window.suShiJourneyWorks).filter((work) => work.journey_id === journeyId);
+  };
+
+  app.getJourneyWorksForVisit = function getJourneyWorksForVisit(visitId) {
+    return asArray(window.suShiJourneyWorks).filter((work) => work.visit_id === visitId);
+  };
+
+  app.getJourneyVisitById = function getJourneyVisitById(visitId) {
+    const features = window.suShiJourneyVisits?.features || [];
+    const feature = features.find((item) => item.properties?.visit_id === visitId);
+    if (!feature) return null;
+    const [lon, lat] = feature.geometry.coordinates;
+    return { ...feature.properties, lat, lon };
+  };
+
   app.getPersonById = function getPersonById(personId) {
     return app.getPeople().find((person) => person.person_id === personId) || null;
   };
