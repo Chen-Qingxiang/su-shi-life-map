@@ -1,0 +1,8 @@
+{
+  "journeys": 2,
+  "visits": 62,
+  "segments": 60,
+  "representative_works": 29,
+  "chapter_02": {"visits": 28, "segments": 27, "works": 11},
+  "chapter_03": {"visits": 34, "segments": 33, "works": 18}
+}
