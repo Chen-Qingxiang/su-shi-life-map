@@ -19,8 +19,12 @@
         <button type="button" class="mode-button" data-mode="journey">章节旅程</button>
       </div>
       <div class="journey-banner" id="journeyBanner" hidden>
-        <strong>01 食蓼少年 · 1059—1060 南行</strong>
-        <span>蓝线为离蜀水路，棕色虚线为荆州北上陆路；虚线边框节点表示位置仍待核。</span>
+        <label class="journey-select-label" for="journeySelect">
+          <span>选择章节旅程</span>
+          <select id="journeySelect" aria-label="选择章节旅程"></select>
+        </label>
+        <strong id="journeyTitle"></strong>
+        <span id="journeyDescription">不同颜色表示章节内部的行程阶段；虚线边框节点表示位置仍待核。</span>
       </div>
       <h2 class="side-heading">人生阶段</h2>
       <div class="legend" id="legend"></div>
@@ -73,12 +77,16 @@
   <script src="data/sushi-journey-visits.js"></script>
   <script src="data/sushi-journey-segments.js"></script>
   <script src="data/sushi-journey-works.js"></script>
+  <script src="data/sushi-journeys-chapters-02-03.js"></script>
+  <script src="data/sushi-journey-chapter-02.js"></script>
+  <script src="data/sushi-journey-chapter-03.js"></script>
   <script src="src/config.js"></script>
   <script src="src/data.js"></script>
   <script src="src/knowledge.js"></script>
   <script src="src/popups.js"></script>
   <script src="src/sidebar.js"></script>
   <script src="src/map.js"></script>
+  <script src="src/journey-multi.js"></script>
   <script src="src/main.js"></script>
 </body>
 </html>
