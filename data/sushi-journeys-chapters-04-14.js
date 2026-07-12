@@ -1,0 +1,187 @@
+(function () {
+  window.suShiJourneysChapters414 = [
+    {
+      "journey_id": "huanglou_1077_1079",
+      "title": "1077—1079：黄楼",
+      "short_title": "1077—1079 黄楼",
+      "chapter": "04 黄楼",
+      "year_start": 1077,
+      "year_end": 1079,
+      "summary": "从密州离任、徐州抗洪与黄楼文友圈，到转任湖州，呈现地方治理与文学交游并行的两年。",
+      "phases": [
+        {"phase_id":"xuzhou_road","title":"密州离任与入徐州","travel_mode":"水陆兼程","color":"#7c3aed","dash_array":"9 6"},
+        {"phase_id":"xuzhou_service","title":"徐州任所与水灾","travel_mode":"驻留 / 城郊巡行","color":"#c2410c","dash_array":"4 5"},
+        {"phase_id":"huanglou_circle","title":"黄楼文友圈","travel_mode":"驻留 / 宴游","color":"#2563eb","dash_array":"3 5"},
+        {"phase_id":"huzhou_road","title":"离徐州赴湖州","travel_mode":"水路为主","color":"#0f766e","dash_array":"10 6"}
+      ],
+      "source_note": "Reading/苏东坡新传/04 黄楼.md：年代与地点、行踪总线、事件线、作品互证。"
+    },
+    {
+      "journey_id": "wutai_1079",
+      "title": "1079：乌台诗狱",
+      "short_title": "1079 乌台诗狱",
+      "chapter": "05 乌台诗狱",
+      "year_start": 1079,
+      "year_end": 1079,
+      "summary": "从湖州被捕、押解入京、御史台审讯到定谳出狱，展示文字如何在党争中被重释为罪证。",
+      "phases": [
+        {"phase_id":"arrest","title":"湖州追捕与押解","travel_mode":"水路押送","color":"#b91c1c","dash_array":"9 6"},
+        {"phase_id":"prison","title":"御史台勘问","travel_mode":"囚禁 / 审讯","color":"#475569","dash_array":"2 6"},
+        {"phase_id":"rescue","title":"论救与定谳","travel_mode":"京师政治空间","color":"#7c3aed","dash_array":"4 5"}
+      ],
+      "source_note": "Reading/苏东坡新传/05 乌台诗狱.md：年代与地点、最值得记的时间点、事件线、作品互证。"
+    },
+    {
+      "journey_id": "huangzhou_1080_1084",
+      "title": "1080—1084：黄州五年",
+      "short_title": "1080—1084 黄州五年",
+      "chapter": "06 黄州五年",
+      "year_start": 1080,
+      "year_end": 1084,
+      "summary": "从流放路、定惠院和临皋亭，到东坡雪堂、赤壁与离黄，记录五年生活重建和思想转化。",
+      "phases": [
+        {"phase_id":"huangzhou_exile_road","title":"出狱赴黄","travel_mode":"陆路押送","color":"#475569","dash_array":"9 6"},
+        {"phase_id":"huangzhou_settle","title":"定惠院与临皋亭","travel_mode":"驻留 / 周边往返","color":"#7c3aed","dash_array":"4 5"},
+        {"phase_id":"dongpo_rebuild","title":"东坡与雪堂","travel_mode":"耕作 / 书斋","color":"#c2410c","dash_array":"3 5"},
+        {"phase_id":"red_cliff","title":"黄泥坂与赤壁","travel_mode":"步行 / 舟行","color":"#2563eb","dash_array":"8 5"},
+        {"phase_id":"leave_huangzhou","title":"别黄州","travel_mode":"水路","color":"#0f766e","dash_array":"10 6"}
+      ],
+      "source_note": "Reading/苏东坡新传/06 黄州五年.md：年代与地点、本章地点线索、事件线、作品互证。"
+    },
+    {
+      "journey_id": "jianghuai_1084_1085",
+      "title": "1084—1085：飘泊江淮",
+      "short_title": "1084—1085 飘泊江淮",
+      "chapter": "07 飘泊江淮",
+      "year_start": 1084,
+      "year_end": 1085,
+      "summary": "离黄后经庐山、金陵、宜兴、南都至登州，再奉召返京，是一段不断寻找安身地的漂泊。",
+      "phases": [
+        {"phase_id":"lushan","title":"庐山纪游","travel_mode":"步行 / 山行","color":"#2563eb","dash_array":"8 5"},
+        {"phase_id":"family_journey","title":"访弟送子与沿江东下","travel_mode":"水陆兼程","color":"#7c3aed","dash_array":"9 6"},
+        {"phase_id":"jinling_yixing","title":"金陵会王安石与求田阳羡","travel_mode":"水路为主","color":"#c2410c","dash_array":"6 5"},
+        {"phase_id":"south_capital","title":"泗州南都与常州归居","travel_mode":"水陆兼程","color":"#0f766e","dash_array":"10 6"},
+        {"phase_id":"dengzhou_return","title":"登州五日与召还","travel_mode":"北上陆水兼程","color":"#be123c","dash_array":"4 5"}
+      ],
+      "source_note": "Reading/苏东坡新传/07 飘泊江淮.md：总路线、分段年代地点、事件线、作品互证。"
+    },
+    {
+      "journey_id": "jinghua_1085_1089",
+      "title": "1085—1089：风雨京华",
+      "short_title": "1085—1089 风雨京华",
+      "chapter": "08 风雨京华",
+      "year_start": 1085,
+      "year_end": 1089,
+      "summary": "元祐还朝后进入中书、翰林与经筵，又因独立政见和台谏围攻主动乞郡离京。",
+      "phases": [
+        {"phase_id":"return_court","title":"召还与元祐更化","travel_mode":"登州至汴京 / 入朝","color":"#7c3aed","dash_array":"8 5"},
+        {"phase_id":"central_office","title":"中书翰林与役法争论","travel_mode":"京师政治空间","color":"#c2410c","dash_array":"3 5"},
+        {"phase_id":"lecture_exam","title":"经筵与贡院","travel_mode":"京师宫城","color":"#2563eb","dash_array":"4 5"},
+        {"phase_id":"attacks_departure","title":"台谏围攻与乞郡","travel_mode":"京师至外任","color":"#be123c","dash_array":"2 6"}
+      ],
+      "source_note": "Reading/苏东坡新传/08 风雨京华.md：年代与地点、京师政治空间、事件线、作品互证。"
+    },
+    {
+      "journey_id": "study_circle_1086_1089",
+      "title": "1086—1089：书斋内外",
+      "short_title": "1086—1089 书斋内外",
+      "chapter": "09 书斋内外",
+      "year_start": 1086,
+      "year_end": 1089,
+      "summary": "以汴京苏宅、馆阁、西园和朋友斋舍为中心，呈现苏门、书画雅集、家庭与患难友情。",
+      "phases": [
+        {"phase_id":"family_sumen","title":"一家与苏门","travel_mode":"京师城内往返","color":"#7c3aed","dash_array":"4 5"},
+        {"phase_id":"art_circle","title":"书画雅集与患难朋友","travel_mode":"京师文化空间","color":"#2563eb","dash_array":"3 5"},
+        {"phase_id":"banquets","title":"宴游、方外与黄州回望","travel_mode":"京师及近郊","color":"#c2410c","dash_array":"5 5"},
+        {"phase_id":"hangzhou_departure","title":"离京重结西湖缘","travel_mode":"水陆南下","color":"#0f766e","dash_array":"10 6"}
+      ],
+      "source_note": "Reading/苏东坡新传/09 书斋内外.md：年代与地点、地点群、事件线、作品互证。"
+    },
+    {
+      "journey_id": "hangzhou_return_1089_1091",
+      "title": "1089—1091：杭州去来",
+      "short_title": "1089—1091 杭州去来",
+      "chapter": "10 杭州去来",
+      "year_start": 1089,
+      "year_end": 1091,
+      "summary": "第二次知杭州期间整治水利、疫病与灾荒，奉召返京后又因竹寺题诗案出知颍州。",
+      "phases": [
+        {"phase_id":"hangzhou_arrival","title":"再到杭州与预备灾荒","travel_mode":"驻留 / 城内巡行","color":"#7c3aed","dash_array":"4 5"},
+        {"phase_id":"water_health","title":"六井、西湖与疫病救济","travel_mode":"城郊工程","color":"#2563eb","dash_array":"5 5"},
+        {"phase_id":"flood_relief","title":"浙西水灾与储粮","travel_mode":"跨州勘灾","color":"#c2410c","dash_array":"8 5"},
+        {"phase_id":"return_capital","title":"奉召离杭与再入京","travel_mode":"水陆兼程","color":"#0f766e","dash_array":"10 6"},
+        {"phase_id":"poem_case","title":"竹寺题诗案与出知颍州","travel_mode":"京师政治空间","color":"#be123c","dash_array":"2 6"}
+      ],
+      "source_note": "Reading/苏东坡新传/10 杭州去来.md：年代与地点、地点群、事件线、作品互证。"
+    },
+    {
+      "journey_id": "ying_yang_ding_1091_1094",
+      "title": "1091—1094：颍州·扬州·定州",
+      "short_title": "1091—1094 颍州·扬州·定州",
+      "chapter": "11 颍州·扬州·定州",
+      "year_start": 1091,
+      "year_end": 1094,
+      "summary": "从颍州、扬州地方实政，二次还朝，到定州边防和绍圣清算，最终再贬岭南。",
+      "phases": [
+        {"phase_id":"yingzhou","title":"颍州短暂安稳","travel_mode":"驻留 / 城郊巡行","color":"#2563eb","dash_array":"4 5"},
+        {"phase_id":"yangzhou","title":"淮上行民间与扬州实政","travel_mode":"水陆兼程","color":"#0f766e","dash_array":"8 5"},
+        {"phase_id":"second_court","title":"二次还朝与丧偶","travel_mode":"京师政治空间","color":"#7c3aed","dash_array":"3 5"},
+        {"phase_id":"dingzhou","title":"定州边政","travel_mode":"陆路 / 驻留","color":"#c2410c","dash_array":"5 5"},
+        {"phase_id":"shaosheng","title":"绍圣清算","travel_mode":"政治转折","color":"#be123c","dash_array":"2 6"}
+      ],
+      "source_note": "Reading/苏东坡新传/11 颍州·扬州·定州.md：年代与地点、路线与地点群、事件线、作品互证。"
+    },
+    {
+      "journey_id": "huizhou_1094_1097",
+      "title": "1094—1097：惠州流人",
+      "short_title": "1094—1097 惠州流人",
+      "chapter": "12 惠州流人",
+      "year_start": 1094,
+      "year_end": 1097,
+      "summary": "从定州南贬、越岭抵惠，到公共工程、和陶、朝云之死、白鹤峰新居与再贬海南。",
+      "phases": [
+        {"phase_id":"south_exile","title":"定州南贬与过岭","travel_mode":"水陆兼程","color":"#be123c","dash_array":"10 6"},
+        {"phase_id":"huizhou_settle","title":"合江楼与嘉祐寺","travel_mode":"驻留 / 城郊往返","color":"#7c3aed","dash_array":"4 5"},
+        {"phase_id":"public_life","title":"惠州公益与和陶","travel_mode":"跨城协作","color":"#2563eb","dash_array":"5 5"},
+        {"phase_id":"baihe_peak","title":"朝云之死与白鹤峰","travel_mode":"驻留 / 营建","color":"#475569","dash_array":"3 5"},
+        {"phase_id":"hainan_road","title":"再贬海外与兄弟永诀","travel_mode":"水陆兼程","color":"#0f766e","dash_array":"9 6"}
+      ],
+      "source_note": "Reading/苏东坡新传/12 惠州流人.md：年代与地点、地点链、事件线、作品互证。"
+    },
+    {
+      "journey_id": "hainan_1097_1100",
+      "title": "1097—1100：海外东坡",
+      "short_title": "1097—1100 海外东坡",
+      "chapter": "13 海外东坡",
+      "year_start": 1097,
+      "year_end": 1100,
+      "summary": "三年儋州生活从贫困、桄榔庵、本地交游到经学著述和造墨，终于获命渡海北归。",
+      "phases": [
+        {"phase_id":"cross_hainan","title":"渡海抵儋","travel_mode":"海路 / 山路","color":"#0f766e","dash_array":"10 6"},
+        {"phase_id":"danzhou_survival","title":"官屋与贫中自适","travel_mode":"驻留 / 城乡往返","color":"#475569","dash_array":"4 5"},
+        {"phase_id":"gilangan","title":"房屋风波与桄榔庵","travel_mode":"营建 / 驻留","color":"#c2410c","dash_array":"3 5"},
+        {"phase_id":"study_network","title":"读书、著述与本地关系","travel_mode":"驻留 / 交游","color":"#2563eb","dash_array":"5 5"},
+        {"phase_id":"leave_island","title":"离海南至廉州","travel_mode":"海陆兼程","color":"#7c3aed","dash_array":"9 6"}
+      ],
+      "source_note": "Reading/苏东坡新传/13 海外东坡.md：年代与地点、地点链、事件线、作品互证。"
+    },
+    {
+      "journey_id": "beigui_1100_1102",
+      "title": "1100—1102：北归",
+      "short_title": "1100—1102 北归",
+      "chapter": "14 北归",
+      "year_start": 1100,
+      "year_end": 1102,
+      "summary": "从廉州北上、越大庾岭、虔州羁留与江南水路，到常州逝世及次年郏城安葬。",
+      "phases": [
+        {"phase_id":"guangxi_north","title":"廉州至广州：归途初启与秦观之丧","travel_mode":"水陆兼程","color":"#0f766e","dash_array":"10 6"},
+        {"phase_id":"lingnan_exit","title":"广州至大庾岭：家人团聚与出岭","travel_mode":"水陆兼程","color":"#c2410c","dash_array":"9 6"},
+        {"phase_id":"ganzhou_wait","title":"虔州羁留：归处未定","travel_mode":"驻留 / 城郊往返","color":"#7c3aed","dash_array":"4 5"},
+        {"phase_id":"lower_yangtze","title":"赣江至金山：归处一变再变","travel_mode":"水路为主","color":"#2563eb","dash_array":"8 5"},
+        {"phase_id":"last_days","title":"仪真至常州：染疾与逝世","travel_mode":"水路 / 驻留","color":"#b91c1c","dash_array":"3 5"},
+        {"phase_id":"legacy","title":"灵柩北归与郏城安葬","travel_mode":"身后行程","color":"#475569","dash_array":"2 7"}
+      ],
+      "source_note": "Reading/苏东坡新传/14 北归.md：年代与地点、地点链、事件线、作品互证。"
+    }
+  ];
+})();
