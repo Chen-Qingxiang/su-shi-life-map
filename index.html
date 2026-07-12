@@ -3,22 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A reading map for Su Shi's life locations, with 1080 historical regime overlays from Hartwell China Historical GIS.">
+  <meta name="description" content="A chapter-aware digital humanities reading map for Su Shi's life, people, events and works.">
   <title>苏轼生平行迹地图</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="src/styles.css">
   <link rel="stylesheet" href="src/wikisource-reader.css">
+  <link rel="stylesheet" href="src/workbench.css">
 </head>
 <body>
+  <button type="button" class="sidebar-toggle" id="sidebarToggle" aria-controls="readingSidebar" aria-expanded="true">收起资料</button>
   <main>
-    <aside>
-      <h1>苏轼生平行迹地图</h1>
-      <p class="sub">根据《苏东坡新传》章节主线整理。地点使用现代城市近似坐标，路线连线用于理解人生阶段，不代表精确古道。</p>
-      <p class="source-note">右上角可分级开关水系：东坡相关命名河流、中国及周边的大江干流、主要支流与区域河网；也可开关 GMBA 主要山系范围和 OSM 命名山脊线。Esri 地形晕渲与 OpenTopoMap 继续保留。现代自然地理图层不等于北宋河道或古道复原。</p>
+    <aside id="readingSidebar">
+      <header class="app-header">
+        <h1>苏轼生平行迹地图</h1>
+        <p class="chapter-progress" id="chapterProgress">读取章节资料……</p>
+      </header>
+      <p class="sub">根据《苏东坡新传》章节主线整理。地图负责空间，时间轴负责叙事，人物、事件和作品共同构成当前阅读范围。</p>
+      <p class="source-note">地点和路线用于建立传记阅读的空间感，不代表精确古道。每个章节会显示资料来源、坐标可信度和作品文本状态；1080 年历史区域图层在年代差距较大时默认隐藏。</p>
+
       <div class="mode-switch" id="modeSwitch" aria-label="地图阅读模式">
         <button type="button" class="mode-button is-active" data-mode="life">生平总览</button>
         <button type="button" class="mode-button" data-mode="journey">章节旅程</button>
       </div>
+
       <div class="journey-banner" id="journeyBanner" hidden>
         <label class="journey-select-label" for="journeySelect">
           <span>选择章节旅程</span>
@@ -26,33 +33,67 @@
         </label>
         <strong id="journeyTitle"></strong>
         <span id="journeyDescription">切换章节后，行程、人物、事件和作品会同步更新；不同颜色表示章节内部的行程阶段。</span>
+        <div class="historical-context-note" id="historicalContextNote"></div>
       </div>
+
+      <section class="timeline-shell" id="timelineShell" hidden>
+        <div class="timeline-header">
+          <h2>章节时间轴</h2>
+          <span>点击节点与地图双向联动</span>
+        </div>
+        <div class="timeline-list" id="timelineList"></div>
+      </section>
+
       <h2 class="side-heading">人生阶段</h2>
       <div class="legend" id="legend"></div>
       <h2 class="side-heading">1080 年政权区域（色盲友好配色）</h2>
       <div class="legend" id="regimeLegend"></div>
+
       <h2 class="side-heading" id="detailHeading">地点关联</h2>
+      <div class="detail-actions">
+        <button type="button" id="detailBack" hidden>返回概览</button>
+        <button type="button" id="detailCopy">复制引用</button>
+      </div>
       <div class="detail-panel" id="detailPanel"></div>
+
       <h2 class="side-heading" id="browserHeading">资料浏览</h2>
+      <div class="scope-tools">
+        <div class="scope-search-row">
+          <input id="scopeSearch" type="search" placeholder="搜索地点、人物、事件或作品（/）" autocomplete="off">
+          <select id="scopeFilter" aria-label="资料类型筛选">
+            <option value="all">全部类型</option>
+            <option value="place">地点</option>
+            <option value="visit">行程</option>
+            <option value="person">人物</option>
+            <option value="event">事件</option>
+            <option value="work">作品</option>
+          </select>
+          <select id="qualityFilter" aria-label="可信度与文本状态筛选">
+            <option value="all">全部质量</option>
+            <option value="high">高可信</option>
+            <option value="medium">中可信</option>
+            <option value="low">待核</option>
+            <option value="local">本地原文</option>
+            <option value="external">外部全文</option>
+            <option value="search">自动检索</option>
+          </select>
+        </div>
+        <p class="scope-summary" id="scopeSummary">搜索当前范围</p>
+      </div>
+      <div class="search-results" id="searchResults" hidden></div>
+
       <div class="tabs" id="knowledgeTabs">
         <button type="button" class="tab is-active" data-tab="places">地点</button>
         <button type="button" class="tab" data-tab="people">人物</button>
         <button type="button" class="tab" data-tab="events">事件</button>
         <button type="button" class="tab" data-tab="works">作品</button>
       </div>
-      <div class="tab-panel is-active" data-panel="places">
-        <div class="list" id="placeList"></div>
-      </div>
-      <div class="tab-panel" data-panel="people">
-        <div class="browser-list" id="peopleList"></div>
-      </div>
-      <div class="tab-panel" data-panel="events">
-        <div class="browser-list" id="eventList"></div>
-      </div>
-      <div class="tab-panel" data-panel="works">
-        <div class="browser-list" id="workList"></div>
-      </div>
+      <div class="tab-panel is-active" data-panel="places"><div class="list" id="placeList"></div></div>
+      <div class="tab-panel" data-panel="people"><div class="browser-list" id="peopleList"></div></div>
+      <div class="tab-panel" data-panel="events"><div class="browser-list" id="eventList"></div></div>
+      <div class="tab-panel" data-panel="works"><div class="browser-list" id="workList"></div></div>
     </aside>
+
     <section>
       <div id="map"></div>
       <div class="fallback" id="fallback">地图脚本没有加载。可以查看 <code>data/su-shi-life-locations.geojson</code>，或在联网环境中重新打开本文件。</div>
@@ -93,6 +134,8 @@
   <script src="data/sushi-journey-chapter-12.js"></script>
   <script src="data/sushi-journey-chapter-13.js"></script>
   <script src="data/sushi-journey-chapter-14.js"></script>
+  <script src="data/sushi-knowledge.js"></script>
+  <script src="data/sushi-local-work-texts.js"></script>
   <script src="src/config.js"></script>
   <script src="src/data.js"></script>
   <script src="src/knowledge.js"></script>
@@ -102,7 +145,10 @@
   <script src="src/journey-multi.js"></script>
   <script src="src/journey-chapters-04-14.js"></script>
   <script src="src/journey-context.js"></script>
+  <script src="src/knowledge-model.js"></script>
+  <script src="src/workbench-hooks.js"></script>
   <script src="src/wikisource-reader.js"></script>
   <script src="src/main.js"></script>
+  <script src="src/workbench.js"></script>
 </body>
 </html>
