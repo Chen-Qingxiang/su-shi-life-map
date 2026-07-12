@@ -24,7 +24,7 @@
   }
 
   function textOf(...values) {
-    return values.flatMap((value) => asArray(value)).filter(Boolean).join("\n");
+    return values.flatMap((value) => Array.isArray(value) ? value : [value]).filter(Boolean).join("\n");
   }
 
   function aliasesFor(person) {
