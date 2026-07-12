@@ -6,6 +6,7 @@
     const requestedJourneyId = params.get("journey");
     const journey = app.getJourneyById?.(requestedJourneyId) || app.getJourneyById?.("nanxing_1059_1060") || journeys[0];
     const journeyData = journey ? app.getJourneyMapData?.(journey.journey_id) : { visits: [], segments: { type: "FeatureCollection", features: [] } };
+    const journeyContext = journey ? app.getJourneyContext?.(journey) : null;
 
     app.renderStageLegend(document.querySelector("#legend"), app.uniqueLegend);
     app.renderRegimeLegend(document.querySelector("#regimeLegend"), window.historicalRegimes1080, app.REGIME_COLORS);
@@ -28,14 +29,42 @@
     } = app.createLifeMap({ route, stops, journey: journeyData, journeyMeta: journey });
     const detailPanel = document.querySelector("#detailPanel");
     const placeList = document.querySelector("#placeList");
+    const peopleList = document.querySelector("#peopleList");
+    const eventList = document.querySelector("#eventList");
     const workList = document.querySelector("#workList");
+    const detailHeading = document.querySelector("#detailHeading");
     const browserHeading = document.querySelector("#browserHeading");
     const journeyBanner = document.querySelector("#journeyBanner");
     const journeySelect = document.querySelector("#journeySelect");
     const journeyTitle = document.querySelector("#journeyTitle");
-    const placeTab = document.querySelector('[data-tab="places"]');
+    const knowledgeTabs = document.querySelector("#knowledgeTabs");
+    const tabs = new Map(Array.from(document.querySelectorAll(".tab")).map((tab) => [tab.dataset.tab, tab]));
     const stopsByPlaceKey = new Map(stops.filter((stop) => stop.place_key).map((stop) => [stop.place_key, stop]));
     const visitsById = new Map(journeyData.visits.map((visit) => [visit.visit_id, visit]));
+    const validTabs = new Set(["places", "people", "events", "works"]);
+
+    function activeTabName() {
+      return document.querySelector(".tab.is-active")?.dataset.tab || "places";
+    }
+
+    function activateTab(tabName) {
+      (tabs.get(validTabs.has(tabName) ? tabName : "places") || tabs.get("places"))?.click();
+    }
+
+    function setTabLabels(labels) {
+      Object.entries(labels).forEach(([key, label]) => {
+        const tab = tabs.get(key);
+        if (tab) tab.textContent = label;
+      });
+    }
+
+    function updateUrlState(mode, tabName) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("mode", mode);
+      url.searchParams.set("tab", tabName);
+      if (journey?.journey_id) url.searchParams.set("journey", journey.journey_id);
+      window.history.replaceState({}, "", url);
+    }
 
     if (journeySelect) {
       journeys.forEach((item) => {
@@ -49,6 +78,7 @@
         const url = new URL(window.location.href);
         url.searchParams.set("journey", journeySelect.value);
         url.searchParams.set("mode", "journey");
+        url.searchParams.set("tab", activeTabName());
         window.location.assign(url.toString());
       });
     }
@@ -86,7 +116,7 @@
       if (updateDetail) app.renderJourneyVisitDetail?.(detailPanel, visit);
     };
 
-    function setMode(mode) {
+    function setMode(mode, preferredTab = activeTabName()) {
       document.body.dataset.mode = mode;
       document.querySelectorAll(".mode-button").forEach((button) => {
         button.classList.toggle("is-active", button.dataset.mode === mode);
@@ -98,10 +128,18 @@
         journeyMarkerLayer.addTo(map);
         if (journeySegmentLayer.getBounds().isValid()) map.fitBounds(journeySegmentLayer.getBounds().pad(0.12));
         app.renderJourneyList(placeList, journeyData.visits, journey);
+        app.renderJourneyPeopleBrowser?.(peopleList, detailPanel, journey, journeyContext);
+        app.renderJourneyEventBrowser?.(eventList, detailPanel, journey, journeyContext);
         app.renderJourneyWorkBrowser(workList, detailPanel, journey.journey_id);
         app.renderJourneyIntro(detailPanel, journey);
-        if (browserHeading) browserHeading.textContent = "旅程资料浏览";
-        if (placeTab) placeTab.textContent = "行程";
+        setTabLabels({
+          places: `行程 ${journeyContext?.visits.length || 0}`,
+          people: `人物 ${journeyContext?.people.length || 0}`,
+          events: `事件 ${journeyContext?.events.length || 0}`,
+          works: `作品 ${journeyContext?.works.length || 0}`
+        });
+        if (detailHeading) detailHeading.textContent = "章节关联";
+        if (browserHeading) browserHeading.textContent = `本章资料 · ${journey.chapter}`;
         if (journeyBanner) journeyBanner.hidden = false;
       } else {
         map.removeLayer(journeySegmentLayer);
@@ -111,23 +149,35 @@
         if (routeLine.getBounds().isValid()) map.fitBounds(routeLine.getBounds().pad(0.15));
         placeList.innerHTML = "";
         app.renderPlaceList(placeList, stops, markers, map, app.stages);
+        app.renderPeopleBrowser(peopleList, detailPanel);
+        app.renderEventBrowser(eventList, detailPanel);
         app.renderWorkBrowser(workList, detailPanel);
         app.renderDetailIntro(detailPanel);
-        if (browserHeading) browserHeading.textContent = "资料浏览";
-        if (placeTab) placeTab.textContent = "地点";
+        setTabLabels({
+          places: `地点 ${stops.length}`,
+          people: `人物 ${app.getPeople().length}`,
+          events: `事件 ${app.getEvents().length}`,
+          works: `作品 ${app.getWorks().length}`
+        });
+        if (detailHeading) detailHeading.textContent = "地点关联";
+        if (browserHeading) browserHeading.textContent = "全书资料浏览";
         if (journeyBanner) journeyBanner.hidden = true;
       }
-      placeTab?.click();
+      activateTab(preferredTab);
+      updateUrlState(mode, preferredTab);
     }
 
+    app.setupKnowledgeTabs(knowledgeTabs);
+    document.querySelectorAll(".tab").forEach((tab) => {
+      tab.addEventListener("click", () => updateUrlState(document.body.dataset.mode || "life", tab.dataset.tab));
+    });
     document.querySelectorAll(".mode-button").forEach((button) => {
-      button.addEventListener("click", () => setMode(button.dataset.mode));
+      button.addEventListener("click", () => setMode(button.dataset.mode, activeTabName()));
     });
 
-    app.setupKnowledgeTabs(document.querySelector("#knowledgeTabs"));
-    app.renderPeopleBrowser(document.querySelector("#peopleList"), detailPanel);
-    app.renderEventBrowser(document.querySelector("#eventList"), detailPanel);
-    setMode(params.get("mode") === "journey" ? "journey" : "life");
+    const initialMode = params.get("mode") === "journey" ? "journey" : "life";
+    const initialTab = validTabs.has(params.get("tab")) ? params.get("tab") : "places";
+    setMode(initialMode, initialTab);
   }
 
   init();
