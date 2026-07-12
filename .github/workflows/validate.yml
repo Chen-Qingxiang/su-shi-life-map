@@ -1,0 +1,38 @@
+name: Validate workbench
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate workbench schema and wiring
+        run: python scripts/validate_workbench.py
+
+      - name: Validate chapter 04–14 data
+        run: python scripts/validate_chapters_04_14.py
+
+      - name: Check JavaScript syntax
+        run: |
+          find src data -name '*.js' -print0 \
+            | xargs -0 -n1 node --check
