@@ -25,13 +25,13 @@
           <select id="journeySelect" aria-label="选择章节旅程"></select>
         </label>
         <strong id="journeyTitle"></strong>
-        <span id="journeyDescription">不同颜色表示章节内部的行程阶段；虚线边框节点表示位置仍待核。</span>
+        <span id="journeyDescription">切换章节后，行程、人物、事件和作品会同步更新；不同颜色表示章节内部的行程阶段。</span>
       </div>
       <h2 class="side-heading">人生阶段</h2>
       <div class="legend" id="legend"></div>
       <h2 class="side-heading">1080 年政权区域（色盲友好配色）</h2>
       <div class="legend" id="regimeLegend"></div>
-      <h2 class="side-heading">地点关联</h2>
+      <h2 class="side-heading" id="detailHeading">地点关联</h2>
       <div class="detail-panel" id="detailPanel"></div>
       <h2 class="side-heading" id="browserHeading">资料浏览</h2>
       <div class="tabs" id="knowledgeTabs">
@@ -101,6 +101,7 @@
   <script src="src/map.js"></script>
   <script src="src/journey-multi.js"></script>
   <script src="src/journey-chapters-04-14.js"></script>
+  <script src="src/journey-context.js"></script>
   <script src="src/wikisource-reader.js"></script>
   <script src="src/main.js"></script>
 </body>
