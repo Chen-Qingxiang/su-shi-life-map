@@ -364,6 +364,23 @@ button.place.is-active {
   line-height: 1.45;
 }
 
+.evidence-badge.text-status-pending {
+  border-color: #fed7aa;
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.scope-filter-active .tabs,
+.scope-filter-active .tab-panel {
+  display: none;
+}
+
+.browser-item[data-entity-type="person"] strong {
+  color: #101828;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
 .browser-list {
   display: grid;
   gap: 10px;

@@ -1,5 +1,5 @@
 (function (app) {
-  app.createLifeMap = function createLifeMap({ route, stops, journey }) {
+  app.createLifeMap = function createLifeMap({ route, stops, journey, journeyMeta, initialMode = "life" }) {
     const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (character) => ({
       "&": "&amp;",
       "<": "&lt;",
@@ -86,6 +86,7 @@
       }
     });
 
+    const journeyVisitsById = new Map((journey?.visits || []).map((visit) => [visit.visit_id, visit]));
     const journeySegmentLayer = L.geoJSON(journey?.segments || { type: "FeatureCollection", features: [] }, {
       pane: "journeySegments",
       style: (feature) => {
@@ -99,7 +100,11 @@
       },
       onEachFeature: (feature, layer) => {
         const props = feature.properties;
-        layer.bindTooltip(`${props.travel_mode} · ${props.from_visit_id} → ${props.to_visit_id}`, { sticky: true });
+        const from = journeyVisitsById.get(props.from_visit_id);
+        const to = journeyVisitsById.get(props.to_visit_id);
+        const fromLabel = from?.stage || from?.ancient_place || "上一节点";
+        const toLabel = to?.stage || to?.ancient_place || "下一节点";
+        layer.bindTooltip(`${escapeHtml(props.travel_mode)} · ${escapeHtml(fromLabel)} → ${escapeHtml(toLabel)}`, { sticky: true });
       }
     });
 
@@ -121,6 +126,9 @@
       marker.on("click", () => app.selectJourneyVisit?.(visit.visit_id, { pan: false, openPopup: false }));
       journeyMarkers.set(visit.visit_id, marker);
     });
+    const journeyBounds = L.latLngBounds([]);
+    if (journeySegmentLayer.getBounds().isValid()) journeyBounds.extend(journeySegmentLayer.getBounds());
+    (journey?.visits || []).forEach((visit) => journeyBounds.extend([visit.lat, visit.lon]));
 
     const adminBorderLayer = window.historicalRegimes1080 ? L.geoJSON(window.historicalRegimes1080, {
       pane: "historicalRegimes",
@@ -267,13 +275,15 @@
     }) : null;
 
     if (historicalLayer) {
+      const journeyLayerLabel = journeyMeta?.short_title
+        || `${journeyMeta?.year_start || ""}${journeyMeta?.year_end && journeyMeta.year_end !== journeyMeta.year_start ? `—${journeyMeta.year_end}` : ""} ${journeyMeta?.chapter || "当前章节"}`.trim();
       const overlayLayers = {
         "1080 年政权区域（Hartwell/CHGIS）": historicalLayer,
         "县级/行政区边界（Hartwell）": adminBorderLayer,
         "苏轼行迹路线": routeLine,
         "苏轼地点": markerLayer,
-        "章节旅程路线：1059—1060 南行": journeySegmentLayer,
-        "章节旅程节点：1059—1060 南行": journeyMarkerLayer
+        [`章节旅程路线：${journeyLayerLabel}`]: journeySegmentLayer,
+        [`章节旅程节点：${journeyLayerLabel}`]: journeyMarkerLayer
       };
       if (physicalWaterwayLayer) {
         overlayLayers["水系 0 · 东坡相关命名河流（OSM）"] = physicalWaterwayLayer;
@@ -300,13 +310,15 @@
         overlayLayers["政权外缘边界（栅格化近似）"] = regimeBoundaryLayer;
       }
       L.control.layers({"在线底图（OSM）": osm, "地形底图（OpenTopoMap）": topo, "地形晕渲（Esri World Hillshade）": hillshade, "卫星底图（Esri）": satellite}, overlayLayers, {
-        collapsed: false
+        collapsed: window.matchMedia("(max-width: 820px)").matches
       }).addTo(map);
     }
 
-    if (route.length) {
+    if (initialMode === "journey" && journeyBounds.isValid()) {
+      map.fitBounds(journeyBounds.pad(0.12), { animate: false, maxZoom: 7 });
+    } else if (route.length) {
       const bounds = routeLine.getBounds();
-      map.fitBounds(bounds.pad(0.15));
+      map.fitBounds(bounds.pad(0.15), { animate: false });
     }
 
     return {
@@ -317,7 +329,9 @@
       markerLayer,
       journeySegmentLayer,
       journeyMarkerLayer,
-      journeyMarkers
+      journeyMarkers,
+      journeyBounds,
+      historicalLayer
     };
   };
 })(window.SuShiLifeMap = window.SuShiLifeMap || {});

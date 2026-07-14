@@ -389,7 +389,7 @@
       link.target = "_blank";
       link.rel = "noopener noreferrer";
       link.textContent = work.text_source_label || "查看公开文本来源";
-      source.append("文本来源：", link, `。${work.text_status || ""}`);
+      source.append("文本来源：", link, work.text_status_note ? `。${work.text_status_note}` : "");
       container.appendChild(source);
     }
 
@@ -414,12 +414,12 @@
     summary.textContent = stop.event;
     container.appendChild(summary);
 
-    renderKnowledgeSection(container, "相关人物", people, "暂无人物 seed data。", (person) => person.name, (person) => app.renderPersonCard(container, person));
-    renderKnowledgeSection(container, "相关事件", events, "暂无事件 seed data。", (event) => `${formatYearRange(event.year_start, event.year_end)} · ${event.title}`, (event) => {
+    renderKnowledgeSection(container, "相关人物", people, "暂无相关人物资料。", (person) => person.name, (person) => app.renderPersonCard(container, person));
+    renderKnowledgeSection(container, "相关事件", events, "暂无相关事件资料。", (event) => `${formatYearRange(event.year_start, event.year_end)} · ${event.title}`, (event) => {
       app.renderEventCard(container, event);
       if (event.place_key) app.selectPlace?.(event.place_key, { openPopup: true, updateDetail: false });
     });
-    renderKnowledgeSection(container, "相关作品", works, "暂无作品 seed data。", (work) => `${work.year || "年代待核"} · ${work.title}`, (work) => {
+    renderKnowledgeSection(container, "相关作品", works, "暂无相关作品资料。", (work) => `${work.year || "年代待核"} · ${work.title}`, (work) => {
       app.renderWorkCard(container, work);
       if (work.place_key) app.selectPlace?.(work.place_key, { openPopup: true, updateDetail: false });
     });
@@ -448,7 +448,7 @@
     renderKnowledgeSection(container, "相关地点", person.related_place_keys || [], "暂无关联地点。", placeLabel, (placeKey) => app.selectPlace?.(placeKey));
 
     const relations = app.getRelationsForPerson?.(person.person_id) || [];
-    renderKnowledgeSection(container, "相关关系", relations, "暂无关系 seed data。", (item) => {
+    renderKnowledgeSection(container, "相关关系", relations, "暂无相关人物关系。", (item) => {
       const otherId = item.source_person_id === person.person_id ? item.target_person_id : item.source_person_id;
       const other = app.getPersonById?.(otherId);
       return `${other?.name || otherId} · ${item.relation_type}`;

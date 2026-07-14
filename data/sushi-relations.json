@@ -9,7 +9,7 @@
     "year_end": 1066,
     "summary": "苏洵为苏轼之父，是苏轼早年教育、家学和入京背景中的关键人物。",
     "certainty": "high",
-    "source_note": "Manual seed data; verify details later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__su_zhe",
@@ -21,7 +21,7 @@
     "year_end": 1101,
     "summary": "苏辙为苏轼之弟，二人在仕途、政治风波和书信往来中长期相关。",
     "certainty": "high",
-    "source_note": "Manual seed data; verify details later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__wang_fu",
@@ -33,7 +33,7 @@
     "year_end": 1065,
     "summary": "王弗为苏轼原配夫人，是苏轼早年家庭生活的重要人物。",
     "certainty": "high",
-    "source_note": "Manual seed data; verify exact chronology later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__wang_runzhi",
@@ -45,7 +45,7 @@
     "year_end": 1093,
     "summary": "王闰之为苏轼继室，陪伴苏轼经历多段仕宦与迁徙。",
     "certainty": "high",
-    "source_note": "Manual seed data; verify related places later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__chaoyun",
@@ -57,7 +57,7 @@
     "year_end": 1096,
     "summary": "朝云是苏轼晚年重要伴侣，惠州时期尤其重要。",
     "certainty": "medium",
-    "source_note": "Manual seed data; verify framing and chronology later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__ouyang_xiu",
@@ -69,7 +69,7 @@
     "year_end": null,
     "summary": "欧阳修赏识苏轼，对苏轼早期文名传播有重要影响。",
     "certainty": "high",
-    "source_note": "Manual seed data; verify details later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__wang_anshi",
@@ -81,7 +81,7 @@
     "year_end": 1084,
     "summary": "政治立场长期相异，但关系不应简单理解为私人敌对；1084 年苏轼离黄州后曾至金陵见王安石。",
     "certainty": "medium",
-    "source_note": "Manual seed data; verify with biography, CBDB, and primary/secondary sources later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__sima_guang",
@@ -93,7 +93,7 @@
     "year_end": 1086,
     "summary": "二人同处元祐政治语境，但具体政治关系需要谨慎核对。",
     "certainty": "medium",
-    "source_note": "Manual seed data; verify exact relationship framing later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__zhang_dun",
@@ -105,7 +105,7 @@
     "year_end": null,
     "summary": "章惇是苏轼晚年贬谪政治背景中的重要人物；具体因果关系需进一步核对。",
     "certainty": "medium",
-    "source_note": "Manual seed data; verify exact causality and chronology later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__huang_tingjian",
@@ -117,7 +117,7 @@
     "year_end": null,
     "summary": "黄庭坚是苏门文人圈代表人物之一。",
     "certainty": "high",
-    "source_note": "Manual seed data; verify related places later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__qin_guan",
@@ -129,7 +129,7 @@
     "year_end": null,
     "summary": "秦观是苏门文人圈代表人物之一。",
     "certainty": "high",
-    "source_note": "Manual seed data; verify related places later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__chao_buzhi",
@@ -141,7 +141,7 @@
     "year_end": null,
     "summary": "晁补之是苏门文人圈代表人物之一。",
     "certainty": "high",
-    "source_note": "Manual seed data; verify related places later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__zhang_lei",
@@ -153,7 +153,7 @@
     "year_end": null,
     "summary": "张耒是苏门文人圈代表人物之一。",
     "certainty": "high",
-    "source_note": "Manual seed data; verify related places later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__chen_zao",
@@ -165,7 +165,7 @@
     "year_end": 1084,
     "summary": "陈慥是苏轼黄州生活圈中的地方友人。",
     "certainty": "medium",
-    "source_note": "Manual seed data; verify identity and chronology later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__foyin",
@@ -177,7 +177,7 @@
     "year_end": null,
     "summary": "佛印属于苏轼宗教与文学交游语境中的相关人物，具体事迹需谨慎核对。",
     "certainty": "medium",
-    "source_note": "Manual seed data; verify identity, chronology, and anecdotes carefully later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   },
   {
     "relation_id": "su_shi__canliao",
@@ -189,6 +189,6 @@
     "year_end": null,
     "summary": "参寥属于苏轼宗教与文学交游语境中的相关人物。",
     "certainty": "medium",
-    "source_note": "Manual seed data; verify identity, chronology, and related places later."
+    "source_note": "人物关系据当前阅读笔记整理；具体关系、年代与相关地点仍应结合可靠史料复核。"
   }
 ]

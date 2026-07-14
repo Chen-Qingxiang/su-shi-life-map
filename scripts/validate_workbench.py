@@ -103,14 +103,17 @@ def validate_knowledge_schema() -> None:
     if len(supplemental_ids) != len(set(supplemental_ids)):
         fail("duplicate supplemental person_id in data/sushi-knowledge.js")
 
-    for status in ["curated", "event_seed", "text_match", "derived", "local", "external", "search", "missing"]:
+    for status in ["curated", "event_seed", "text_match", "derived", "local", "external", "pending"]:
         if status not in knowledge:
             fail(f"knowledge schema missing status {status}")
 
 
 def validate_local_texts() -> None:
     local_texts = read("data/sushi-local-work-texts.js")
-    for title in ["前赤壁赋", "后赤壁赋", "定风波", "记承天寺夜游", "寒食雨二首"]:
+    for title in [
+        "前赤壁赋", "后赤壁赋", "定风波", "记承天寺夜游", "寒食雨二首",
+        "念奴娇", "水调歌头", "江城子", "饮湖上初晴后雨", "惠州一绝", "和陶诗",
+    ]:
         if title not in local_texts:
             fail(f"local text seed missing {title}")
     if 'text_verification = "local_verified"' not in local_texts:

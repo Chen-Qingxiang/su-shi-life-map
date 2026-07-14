@@ -266,7 +266,8 @@ def main() -> int:
             work["text_scope"] = "full_page"
             work["text_source_label"] = "诗歌库《苏轼诗全集》"
             work["text_source_url"] = SHIGEKU_URL
-            work["text_status"] = "公开文本已接入；此条为补充来源，必须与可靠点校本复核"
+            work["text_status"] = "local"
+            work["text_status_note"] = "原文已保存于项目；此条采用补充来源，必须与可靠点校本复核。"
             continue
         page = find_page(work, links)
         if not page:
@@ -287,7 +288,8 @@ def main() -> int:
         work["text_scope"] = scope
         work["text_source_label"] = "维基文库《东坡全集》"
         work["text_source_url"] = page_url(page)
-        work["text_status"] = "公开文本已接入，仍需与可靠点校本逐首校勘"
+        work["text_status"] = "local"
+        work["text_status_note"] = "原文已保存于项目；仍需与可靠点校本逐首校勘。"
 
     WORKS_PATH.write_text(json.dumps(works, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Attached text to {sum(bool(work.get('text')) for work in works)} of {len(works)} works from {len(page_cache)} Wikisource pages.")

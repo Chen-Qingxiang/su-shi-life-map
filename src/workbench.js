@@ -43,8 +43,13 @@
     return window.suShiKnowledgeConfig?.certainty_levels?.[value] || value || "待核";
   }
 
+  function textStatusLabel(value) {
+    return window.suShiKnowledgeConfig?.work_text_statuses?.[value] || value || "待补全文";
+  }
+
   function qualityForWork(work) {
-    const status = app.getWorkTextStatus?.(work) || (work.text ? "local" : "search");
+    const status = app.getWorkTextStatus?.(work)
+      || (work.text ? "local" : work.text_source_url && !/Special:Search/i.test(work.text_source_url) ? "external" : "pending");
     return {
       status,
       certainty: status === "local" ? "high" : status === "external" ? "medium" : "low"
@@ -95,7 +100,7 @@
       textarea.remove();
     }
     if (detailCopy) {
-      detailCopy.textContent = "已复制";
+      detailCopy.textContent = "已复制引用";
       window.setTimeout(() => { detailCopy.textContent = "复制引用"; }, 1200);
     }
   }
@@ -167,8 +172,11 @@
   }
 
   function setHistoricalPaneVisible(visible) {
-    const pane = app.mapContext?.map?.getPane?.("historicalRegimes");
-    if (pane) pane.style.display = visible ? "" : "none";
+    const map = app.mapContext?.map;
+    const layer = app.mapContext?.historicalLayer;
+    if (!map || !layer) return;
+    if (visible && !map.hasLayer(layer)) layer.addTo(map);
+    if (!visible && map.hasLayer(layer)) map.removeLayer(layer);
   }
 
   function storageGet(key) {
@@ -330,7 +338,9 @@
     const query = scopeSearch.value.trim().toLocaleLowerCase("zh-Hans-CN");
     const type = scopeFilter?.value || "all";
     const quality = qualityFilter?.value || "all";
-    if (!query && type === "all" && quality === "all") {
+    const filtering = Boolean(query || type !== "all" || quality !== "all");
+    document.body.classList.toggle("scope-filter-active", filtering);
+    if (!filtering) {
       searchResults.hidden = true;
       searchResults.innerHTML = "";
       if (scopeSummary) scopeSummary.textContent = activeMode() === "journey" ? "搜索当前章节" : "搜索全书资料";
@@ -356,7 +366,10 @@
       const button = document.createElement("button");
       button.type = "button";
       button.className = "search-result";
-      button.innerHTML = `<span class="search-result-type">${typeLabel(result.type)}</span><strong>${result.title}</strong><small>${result.meta || ""}</small><small>${result.summary || ""}</small><span class="search-result-quality">${certaintyLabel(result.certainty)}</span>`;
+      const qualityLabel = result.type === "work" && result.textStatus
+        ? textStatusLabel(result.textStatus)
+        : certaintyLabel(result.certainty);
+      button.innerHTML = `<span class="search-result-type">${typeLabel(result.type)}</span><strong>${result.title}</strong><small>${result.meta || ""}</small><small>${result.summary || ""}</small><span class="search-result-quality">${qualityLabel}</span>`;
       button.addEventListener("click", () => openSearchResult(result));
       searchResults.appendChild(button);
     });
@@ -477,6 +490,7 @@
     const wide = !window.matchMedia("(max-width: 820px)").matches;
     document.body.classList.toggle("sidebar-open", wide);
     sidebarToggle.setAttribute("aria-expanded", String(wide));
+    sidebarToggle.textContent = wide ? "收起资料" : "打开资料";
   }
 
   function setupKeyboard() {

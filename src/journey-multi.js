@@ -151,22 +151,10 @@
   app.renderJourneyWorkCard = function renderJourneyWorkCard(container, work) {
     if (!container || !work) return;
     container.innerHTML = `<div class="knowledge-header"><span>章节作品</span><h3>${work.title}</h3><p>${work.time_text || work.year} · ${work.location_text}</p></div><p class="knowledge-summary">${work.summary}</p>`;
-    if (work.text) {
-      const text = document.createElement("pre");
-      text.className = "poem-text";
-      text.textContent = work.text;
-      container.appendChild(text);
-    }
     const collection = document.createElement("p");
     collection.className = "muted-line";
     collection.textContent = `作品集关联：${work.collection_label || work.collection_id || "章节作品"} · 作者：苏轼`;
     container.appendChild(collection);
-    if (work.text_source_url) {
-      const source = document.createElement("p");
-      source.className = "knowledge-source";
-      source.innerHTML = `文本来源：<a href="${work.text_source_url}" target="_blank" rel="noopener noreferrer">${work.text_source_label || "查看公开文本来源"}</a>。${work.text_status || ""}`;
-      container.appendChild(source);
-    }
     const visit = app.getJourneyVisitById(work.visit_id);
     if (visit) {
       const button = document.createElement("button");
