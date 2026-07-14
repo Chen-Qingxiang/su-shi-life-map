@@ -7,6 +7,7 @@
     const journey = app.getJourneyById?.(requestedJourneyId) || app.getJourneyById?.("nanxing_1059_1060") || journeys[0];
     const journeyData = journey ? app.getJourneyMapData?.(journey.journey_id) : { visits: [], segments: { type: "FeatureCollection", features: [] } };
     const journeyContext = journey ? app.getJourneyContext?.(journey) : null;
+    const initialMode = params.get("mode") === "journey" ? "journey" : "life";
 
     app.renderStageLegend(document.querySelector("#legend"), app.uniqueLegend);
     app.renderRegimeLegend(document.querySelector("#regimeLegend"), window.historicalRegimes1080, app.REGIME_COLORS);
@@ -25,8 +26,9 @@
       markerLayer,
       journeySegmentLayer,
       journeyMarkerLayer,
-      journeyMarkers
-    } = app.createLifeMap({ route, stops, journey: journeyData, journeyMeta: journey });
+      journeyMarkers,
+      journeyBounds
+    } = app.createLifeMap({ route, stops, journey: journeyData, journeyMeta: journey, initialMode });
     const detailPanel = document.querySelector("#detailPanel");
     const placeList = document.querySelector("#placeList");
     const peopleList = document.querySelector("#peopleList");
@@ -122,11 +124,12 @@
         button.classList.toggle("is-active", button.dataset.mode === mode);
       });
       if (mode === "journey" && journey) {
+        map.stop();
         map.removeLayer(routeLine);
         map.removeLayer(markerLayer);
         journeySegmentLayer.addTo(map);
         journeyMarkerLayer.addTo(map);
-        if (journeySegmentLayer.getBounds().isValid()) map.fitBounds(journeySegmentLayer.getBounds().pad(0.12));
+        if (journeyBounds.isValid()) map.fitBounds(journeyBounds.pad(0.12), { animate: true, duration: 0.45, maxZoom: 7 });
         app.renderJourneyList(placeList, journeyData.visits, journey);
         app.renderJourneyPeopleBrowser?.(peopleList, detailPanel, journey, journeyContext);
         app.renderJourneyEventBrowser?.(eventList, detailPanel, journey, journeyContext);
@@ -142,6 +145,7 @@
         if (browserHeading) browserHeading.textContent = `本章资料 · ${journey.chapter}`;
         if (journeyBanner) journeyBanner.hidden = false;
       } else {
+        map.stop();
         map.removeLayer(journeySegmentLayer);
         map.removeLayer(journeyMarkerLayer);
         routeLine.addTo(map);
@@ -175,7 +179,6 @@
       button.addEventListener("click", () => setMode(button.dataset.mode, activeTabName()));
     });
 
-    const initialMode = params.get("mode") === "journey" ? "journey" : "life";
     const initialTab = validTabs.has(params.get("tab")) ? params.get("tab") : "places";
     setMode(initialMode, initialTab);
   }

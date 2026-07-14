@@ -10,7 +10,7 @@
     "native_place": "眉州眉山",
     "native_place_key": "meishan",
     "related_place_keys": ["meishan", "chengdu", "bianjing", "fengxiang", "hangzhou", "mizhou", "xuzhou", "huzhou", "huangzhou", "jinling", "huizhou", "danzhou", "changzhou"],
-    "source_note": "Manual seed data; verify with biography, CBDB, and primary/secondary sources later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "su_xun",
@@ -23,7 +23,7 @@
     "native_place": "眉州眉山",
     "native_place_key": "meishan",
     "related_place_keys": ["meishan", "chengdu", "bianjing"],
-    "source_note": "Manual seed data; verify with biography, CBDB, and primary/secondary sources later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "su_zhe",
@@ -36,7 +36,7 @@
     "native_place": "眉州眉山",
     "native_place_key": "meishan",
     "related_place_keys": ["meishan", "bianjing", "huangzhou"],
-    "source_note": "Manual seed data; verify with biography, CBDB, and primary/secondary sources later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "wang_fu",
@@ -49,7 +49,7 @@
     "native_place": null,
     "native_place_key": null,
     "related_place_keys": ["meishan", "bianjing"],
-    "source_note": "Manual seed data; verify exact biographical details later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "wang_runzhi",
@@ -62,7 +62,7 @@
     "native_place": null,
     "native_place_key": null,
     "related_place_keys": ["bianjing", "hangzhou"],
-    "source_note": "Manual seed data; verify exact related places later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "chaoyun",
@@ -75,7 +75,7 @@
     "native_place": null,
     "native_place_key": null,
     "related_place_keys": ["hangzhou", "huizhou"],
-    "source_note": "Manual seed data; verify with biography and reliable secondary sources later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "ouyang_xiu",
@@ -88,7 +88,7 @@
     "native_place": null,
     "native_place_key": null,
     "related_place_keys": ["bianjing"],
-    "source_note": "Manual seed data; verify with biography, CBDB, and primary/secondary sources later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "wang_anshi",
@@ -101,7 +101,7 @@
     "native_place": "临川",
     "native_place_key": null,
     "related_place_keys": ["bianjing", "jinling"],
-    "source_note": "Manual seed data; verify with biography, CBDB, and primary/secondary sources later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "sima_guang",
@@ -114,7 +114,7 @@
     "native_place": null,
     "native_place_key": null,
     "related_place_keys": ["bianjing"],
-    "source_note": "Manual seed data; verify exact relationship framing later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "zhang_dun",
@@ -127,7 +127,7 @@
     "native_place": null,
     "native_place_key": null,
     "related_place_keys": ["bianjing", "huizhou", "danzhou"],
-    "source_note": "Manual seed data; verify exact causality and chronology later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "huang_tingjian",
@@ -140,7 +140,7 @@
     "native_place": null,
     "native_place_key": null,
     "related_place_keys": ["bianjing"],
-    "source_note": "Manual seed data; verify related places and relationship details later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "qin_guan",
@@ -153,7 +153,7 @@
     "native_place": null,
     "native_place_key": null,
     "related_place_keys": ["bianjing"],
-    "source_note": "Manual seed data; verify related places and relationship details later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "chao_buzhi",
@@ -166,7 +166,7 @@
     "native_place": null,
     "native_place_key": null,
     "related_place_keys": ["bianjing"],
-    "source_note": "Manual seed data; verify related places and relationship details later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "zhang_lei",
@@ -179,7 +179,7 @@
     "native_place": null,
     "native_place_key": null,
     "related_place_keys": ["bianjing"],
-    "source_note": "Manual seed data; verify related places and relationship details later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "chen_zao",
@@ -192,7 +192,7 @@
     "native_place": null,
     "native_place_key": null,
     "related_place_keys": ["huangzhou"],
-    "source_note": "Manual seed data; verify identity, chronology, and related places later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "foyin",
@@ -205,7 +205,7 @@
     "native_place": null,
     "native_place_key": null,
     "related_place_keys": ["lushan_jiangzhou", "huangzhou"],
-    "source_note": "Manual seed data; verify identity, chronology, and anecdotes carefully later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   },
   {
     "person_id": "canliao",
@@ -218,6 +218,6 @@
     "native_place": null,
     "native_place_key": null,
     "related_place_keys": ["hangzhou", "huangzhou"],
-    "source_note": "Manual seed data; verify identity, chronology, and related places later."
+    "source_note": "人物资料据当前阅读笔记整理；生平、关系与地点仍应结合传记、CBDB 及一手、二手史料复核。"
   }
 ]

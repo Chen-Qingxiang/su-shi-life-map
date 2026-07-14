@@ -3,6 +3,7 @@
   const SITE_URL = "https://zh.wikisource.org/wiki/";
   const resultCache = new Map();
   const baseRenderJourneyWorkCard = app.renderJourneyWorkCard;
+  const baseRenderWorkCard = app.renderWorkCard;
 
   function apiUrl(params) {
     const url = new URL(API_URL);
@@ -189,81 +190,82 @@
   }
 
   function createReader(container, work) {
-    const token = Symbol(work.work_id || work.title);
-    container.dataset.workReaderState = "loading";
-    container._workReaderToken = token;
-
+    if (!container || !work || (!work.text && !work.text_source_url)) return;
+    container.querySelector(".work-reader")?.remove();
     const section = document.createElement("section");
     section.className = "work-reader";
-    section.innerHTML = `
-      <div class="work-reader-heading">
-        <h4>原文</h4>
-        <span class="work-reader-status">正在从维基文库检索并载入原文……</span>
-      </div>
-      <div class="work-reader-actions">
-        <button type="button" class="work-reader-retry" hidden>重新加载</button>
-        <a class="work-reader-open" href="${work.text_source_url || `https://zh.wikisource.org/wiki/Special:Search?search=${encodeURIComponent(work.title)}`}" target="_blank" rel="noopener noreferrer">在维基文库打开</a>
-      </div>
-      <div class="work-reader-body" aria-live="polite"></div>
-    `;
+
+    const heading = document.createElement("div");
+    heading.className = "work-reader-heading";
+    const title = document.createElement("h4");
+    title.textContent = "阅读原文";
+    const status = document.createElement("span");
+    status.className = "work-reader-status";
+    status.textContent = work.text
+      ? `本地已保存${work.text_scope ? ` · ${work.text_scope}` : ""}`
+      : "本地暂无全文";
+    heading.append(title, status);
+    section.appendChild(heading);
+
+    const actions = document.createElement("div");
+    actions.className = "work-reader-actions";
+
+    let body = null;
+    if (work.text) {
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "work-reader-toggle";
+      toggle.textContent = "阅读原文";
+      toggle.setAttribute("aria-expanded", "false");
+      actions.appendChild(toggle);
+
+      body = document.createElement("div");
+      body.className = "work-reader-body";
+      body.hidden = true;
+      const text = document.createElement("pre");
+      text.className = "poem-text";
+      text.textContent = work.text;
+      body.appendChild(text);
+
+      toggle.addEventListener("click", () => {
+        const expanded = body.hidden;
+        body.hidden = !expanded;
+        toggle.textContent = expanded ? "收起原文" : "阅读原文";
+        toggle.setAttribute("aria-expanded", String(expanded));
+      });
+    }
+
+    if (work.text_source_url) {
+      const openLink = document.createElement("a");
+      openLink.className = "work-reader-open";
+      openLink.href = work.text_source_url;
+      openLink.target = "_blank";
+      openLink.rel = "noopener noreferrer";
+      openLink.textContent = work.text ? "在维基文库核对" : (work.text_source_label || "在维基文库阅读");
+      actions.appendChild(openLink);
+    }
+
+    section.appendChild(actions);
+    if (body) section.appendChild(body);
+    if (work.text_status_note) {
+      const note = document.createElement("p");
+      note.className = "work-reader-note";
+      note.textContent = work.text_status_note;
+      section.appendChild(note);
+    }
 
     const summary = container.querySelector(".knowledge-summary");
     if (summary) summary.insertAdjacentElement("afterend", section);
     else container.appendChild(section);
-
-    const status = section.querySelector(".work-reader-status");
-    const body = section.querySelector(".work-reader-body");
-    const retry = section.querySelector(".work-reader-retry");
-    const openLink = section.querySelector(".work-reader-open");
-
-    async function load() {
-      status.textContent = "正在从维基文库检索并载入原文……";
-      body.innerHTML = '<p class="work-reader-loading">正在加载，请稍候。</p>';
-      retry.hidden = true;
-      body.classList.remove("is-collapsed");
-      section.querySelector(".work-reader-toggle")?.remove();
-      try {
-        const result = await cachedLoad(work);
-        if (container._workReaderToken !== token) return;
-        container.dataset.workReaderState = "loaded";
-        status.textContent = result.matchType === "exact"
-          ? `已载入：${result.pageTitle}`
-          : `已载入最相近页面：${result.pageTitle}（请结合题名核对）`;
-        openLink.href = result.url;
-        body.innerHTML = `<div class="work-reader-source">${result.safeHtml}</div>`;
-
-        if (body.textContent.length > 1200) {
-          body.classList.add("is-collapsed");
-          const toggle = document.createElement("button");
-          toggle.type = "button";
-          toggle.className = "work-reader-toggle";
-          toggle.textContent = "展开阅读全文";
-          toggle.addEventListener("click", () => {
-            const collapsed = body.classList.toggle("is-collapsed");
-            toggle.textContent = collapsed ? "展开阅读全文" : "收起全文";
-          });
-          section.querySelector(".work-reader-actions").prepend(toggle);
-        }
-      } catch (error) {
-        if (container._workReaderToken !== token) return;
-        container.dataset.workReaderState = "error";
-        status.textContent = "未能在页面内载入原文";
-        body.innerHTML = "";
-        const message = document.createElement("p");
-        message.className = "work-reader-error";
-        message.textContent = `${String(error.message || error)}。可以使用右侧链接查看维基文库搜索结果；这通常表示题名存在异名、作品只收在总集卷次中，或当前网络无法访问维基文库。`;
-        body.appendChild(message);
-        retry.hidden = false;
-      }
-    }
-
-    retry.addEventListener("click", load);
-    load();
   }
 
   app.renderJourneyWorkCard = function renderJourneyWorkCard(container, work) {
     baseRenderJourneyWorkCard?.(container, work);
-    if (!container || !work || work.text) return;
+    createReader(container, work);
+  };
+
+  app.renderWorkCard = function renderWorkCard(container, work) {
+    baseRenderWorkCard?.(container, work);
     createReader(container, work);
   };
 })(window.SuShiLifeMap = window.SuShiLifeMap || {});

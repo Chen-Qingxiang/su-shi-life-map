@@ -209,8 +209,7 @@
     work_text_statuses: {
       local: "本地校录原文",
       external: "外部全文",
-      search: "自动检索原文",
-      missing: "尚无全文"
+      pending: "待补全文"
     },
     person_aliases: {
       su_shi: ["苏轼", "蘇軾", "东坡", "東坡", "子瞻"],

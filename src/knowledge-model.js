@@ -99,10 +99,10 @@
   }
 
   function getWorkTextStatus(work) {
+    if (["local", "external", "pending"].includes(work?.text_status)) return work.text_status;
     if (work?.text) return "local";
     if (work?.text_source_url && !/Special:Search/i.test(work.text_source_url)) return "external";
-    if (work?.title) return "search";
-    return "missing";
+    return "pending";
   }
 
   app.getWorkTextStatus = getWorkTextStatus;

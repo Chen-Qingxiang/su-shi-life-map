@@ -10,7 +10,7 @@
     "people": ["su_shi", "su_xun"],
     "works": [],
     "summary": "苏轼出生于眉州眉山，蜀地与苏氏家风构成其早年背景。",
-    "source_note": "Manual seed event based on current reading notes; verify later."
+    "source_note": "事件资料据当前阅读笔记整理；年代、地点及作品关联仍应结合可靠史料复核。"
   },
   {
     "event_id": "bianjing_exam_success",
@@ -23,7 +23,7 @@
     "people": ["su_shi", "su_xun", "su_zhe", "ouyang_xiu"],
     "works": [],
     "summary": "三苏入京，苏轼登进士第，进入北宋士大夫网络。",
-    "source_note": "Manual seed event based on current reading notes; verify later."
+    "source_note": "事件资料据当前阅读笔记整理；年代、地点及作品关联仍应结合可靠史料复核。"
   },
   {
     "event_id": "fengxiang_first_office",
@@ -36,7 +36,7 @@
     "people": ["su_shi"],
     "works": [],
     "summary": "苏轼签书凤翔府节度判官厅公事，开始实际官场生活。",
-    "source_note": "Manual seed event based on current reading notes; verify later."
+    "source_note": "事件资料据当前阅读笔记整理；年代、地点及作品关联仍应结合可靠史料复核。"
   },
   {
     "event_id": "hangzhou_assistant",
@@ -49,7 +49,7 @@
     "people": ["su_shi"],
     "works": ["yin_hu_shang_chu_qing_hou_yu"],
     "summary": "苏轼通判杭州，地方治理经验与杭州书写由此展开。",
-    "source_note": "Manual seed event based on current reading notes; verify exact work chronology later."
+    "source_note": "事件资料据当前阅读笔记整理；年代、地点及作品关联仍应结合可靠史料复核。"
   },
   {
     "event_id": "mizhou_prefect",
@@ -62,7 +62,7 @@
     "people": ["su_shi"],
     "works": ["jiang_cheng_zi_mizhou", "shui_diao_ge_tou_moon"],
     "summary": "苏轼知密州，地方治理与若干词作在此时期相连。",
-    "source_note": "Manual seed event based on current reading notes; verify exact chronology later."
+    "source_note": "事件资料据当前阅读笔记整理；年代、地点及作品关联仍应结合可靠史料复核。"
   },
   {
     "event_id": "xuzhou_yellow_tower",
@@ -75,7 +75,7 @@
     "people": ["su_shi"],
     "works": [],
     "summary": "苏轼知徐州，经历徐州大水并筑黄楼。",
-    "source_note": "Manual seed event based on current reading notes; verify later."
+    "source_note": "事件资料据当前阅读笔记整理；年代、地点及作品关联仍应结合可靠史料复核。"
   },
   {
     "event_id": "huzhou_arrest_wutai",
@@ -88,7 +88,7 @@
     "people": ["su_shi"],
     "works": [],
     "summary": "苏轼知湖州后，因谢表和诗文被构陷并遭逮捕，进入乌台诗狱。",
-    "source_note": "Manual seed event based on current reading notes; verify later."
+    "source_note": "事件资料据当前阅读笔记整理；年代、地点及作品关联仍应结合可靠史料复核。"
   },
   {
     "event_id": "huangzhou_exile",
@@ -101,7 +101,7 @@
     "people": ["su_shi", "su_zhe", "chen_zao", "foyin", "canliao"],
     "works": ["qian_chibi_fu", "hou_chibi_fu", "nian_nu_jiao_chibi", "ding_feng_bo_mo_ting", "ji_cheng_tian_si_ye_you"],
     "summary": "乌台诗狱后，苏轼贬居黄州，东坡身份与若干代表性作品集中形成。",
-    "source_note": "Manual seed event based on current reading notes; verify later."
+    "source_note": "事件资料据当前阅读笔记整理；年代、地点及作品关联仍应结合可靠史料复核。"
   },
   {
     "event_id": "jinling_meets_wang_anshi",
@@ -114,7 +114,7 @@
     "people": ["su_shi", "wang_anshi"],
     "works": [],
     "summary": "苏轼离黄州后至金陵，谒见退居金陵的王安石。",
-    "source_note": "Manual seed event based on current reading notes; verify later."
+    "source_note": "事件资料据当前阅读笔记整理；年代、地点及作品关联仍应结合可靠史料复核。"
   },
   {
     "event_id": "hangzhou_prefect",
@@ -127,7 +127,7 @@
     "people": ["su_shi"],
     "works": [],
     "summary": "苏轼再至杭州任知州，水利、赈灾和西湖治理皆在此展开。",
-    "source_note": "Manual seed event based on current reading notes; verify later."
+    "source_note": "事件资料据当前阅读笔记整理；年代、地点及作品关联仍应结合可靠史料复核。"
   },
   {
     "event_id": "huizhou_exile",
@@ -140,7 +140,7 @@
     "people": ["su_shi", "chaoyun", "zhang_dun"],
     "works": ["huizhou_lychee", "he_tao_poems"],
     "summary": "苏轼贬居惠州，晚年贬谪生活、朝云之死和若干诗作与此相关。",
-    "source_note": "Manual seed event based on current reading notes; verify exact work chronology later."
+    "source_note": "事件资料据当前阅读笔记整理；年代、地点及作品关联仍应结合可靠史料复核。"
   },
   {
     "event_id": "danzhou_exile",
@@ -153,7 +153,7 @@
     "people": ["su_shi", "zhang_dun"],
     "works": [],
     "summary": "苏轼贬儋州，海外生活、读书、著作和教育活动构成晚年重要阶段。",
-    "source_note": "Manual seed event based on current reading notes; verify later."
+    "source_note": "事件资料据当前阅读笔记整理；年代、地点及作品关联仍应结合可靠史料复核。"
   },
   {
     "event_id": "changzhou_death",
@@ -166,6 +166,6 @@
     "people": ["su_shi"],
     "works": [],
     "summary": "苏轼北归途中染疾，卒于常州。",
-    "source_note": "Manual seed event based on current reading notes; verify later."
+    "source_note": "事件资料据当前阅读笔记整理；年代、地点及作品关联仍应结合可靠史料复核。"
   }
 ]

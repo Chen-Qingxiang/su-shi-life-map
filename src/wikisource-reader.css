@@ -59,6 +59,24 @@
   overflow-x: auto;
 }
 
+.work-reader-body[hidden] {
+  display: none;
+}
+
+.work-reader-body .poem-text {
+  margin: 0;
+  border: 0;
+  background: transparent;
+  padding: 4px 0 0;
+}
+
+.work-reader-note {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
 .work-reader-body.is-collapsed {
   max-height: 520px;
   overflow: hidden;
