@@ -1,0 +1,23 @@
+{
+  "id": "/su-shi-life-map/",
+  "name": "苏轼生平行迹地图",
+  "short_name": "苏轼行迹",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#19382f",
+  "theme_color": "#19382f",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

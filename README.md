@@ -194,3 +194,7 @@ find src data -name '*.js' -print0 | xargs -0 -n1 node --check
 - 本项目用于阅读和研究辅助，不应替代正式年谱、文集点校本或历史地理考证成果。
 
 更详细的数据结构见 `docs/knowledge-schema.md`，当前改造清单与完成状态见 `docs/workbench-todo.md`。
+
+## PWA 安装与离线阅读
+
+支持 iOS Safari 添加到主屏幕、macOS Safari 添加到 Dock、Chrome/Edge 安装。首次联网安装时缓存本仓库页面所需的本地 CSS、JavaScript 和历史地理数据；首次访问的外部 Leaflet 1.9.4 资源也单独缓存以支持离线阅读。**在线底图瓦片（OSM / Esri 等）和维基文库远程全文不会被批量缓存**，断网时可能看不到底图或远程文章；本地行迹、人物及已校录作品仍可使用。个人导入的 JSON 或 GeoJSON 不会被 Service Worker 缓存或上传；刷新后需要重新导入。新版线上资源会优先获取，离线时才回退缓存。首次安装约需缓存数 MB 的地理数据，请在网络稳定时打开。
